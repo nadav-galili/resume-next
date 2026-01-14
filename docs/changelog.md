@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Next.js 15 project setup**: Initialized complete Next.js application with App Router in root directory
+  - Core dependencies: Next.js 16.1.1, React 19.2.3, TypeScript 5
+  - Tailwind CSS 4 with shadcn/ui integration
+  - App structure: `app/`, `lib/`, `public/` folders
+  - Configuration files: `package.json`, `tsconfig.json`, `next.config.ts`, `components.json`
+- **MCP (Model Context Protocol) server integration**: Added `.mcp.json` with three MCP servers:
+  - **Vercel MCP** (HTTP): Deployment and project management integration
+  - **shadcn MCP** (stdio): Direct access to shadcn/ui component library and documentation
+  - **Playwright MCP** (stdio): Browser automation capabilities for testing
+- **Environment configuration**: Updated `.env.example` with `VERCEL_MCP_TOKEN` for MCP authentication
 - **Project documentation structure**: Created comprehensive `docs/` folder with:
   - `docs/architecture.md` - Complete system architecture, component hierarchy, data flow, and deployment strategy
   - `docs/changelog.md` - Version history tracking following Keep a Changelog format
@@ -17,10 +27,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- **Project structure**: Moved Next.js application from `/resume/` subdirectory to project root
+  - All Next.js files now at root level for proper project organization
+  - Removed empty `/resume/` directory
 - Refactored CLAUDE.md for improved clarity and organization
 
 ### Technical Details
 
+- **Next.js Setup**: Using latest App Router architecture with TypeScript strict mode
+  - shadcn/ui configured with components ready to add (`npx shadcn@latest add <component>`)
+  - Tailwind CSS v4 with `@tailwindcss/postcss` for modern styling
+  - ESLint and PostCSS configured for development quality
+- **MCP Integration**: Three specialized servers for development workflow
+  - Vercel MCP uses Bearer token authentication via environment variable expansion
+  - shadcn and Playwright MCP run as stdio servers using `npx` for zero-config setup
+  - All servers configured in project-scoped `.mcp.json` for team consistency
 - **Architecture documentation** covers 6 major layers: Root Layout, Page Layout, Section Components, Feature Components, UI Components, and Provider Components
 - **Data flow diagrams** document build-time SSG, runtime hydration, and user interaction flows
 - **Project status** establishes 6-phase development plan with clear milestones

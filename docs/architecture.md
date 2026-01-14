@@ -389,6 +389,40 @@ The application is fully static with no backend API routes.
   - API key stored server-side only
   - Input validation and sanitization
 
+### Development Tooling
+
+#### .mcp.json
+**Purpose**: Model Context Protocol (MCP) server configuration for Claude Code integration
+
+```json
+{
+  "mcpServers": {
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com",
+      "headers": {
+        "Authorization": "Bearer ${VERCEL_MCP_TOKEN}"
+      }
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+**MCP Servers**:
+- **Vercel**: Deployment and project management integration
+- **shadcn**: Direct access to shadcn/ui component documentation and registry
+- **Playwright**: Browser automation for testing and interaction
+
 ### Library Modules
 
 #### lib/utils.ts
