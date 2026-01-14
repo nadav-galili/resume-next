@@ -39,7 +39,7 @@ export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.22, 1, 0.36, 1], // Custom easing
+        ease: [0.22, 1, 0.36, 1] as const, // Custom easing
       },
     },
   }
@@ -50,7 +50,7 @@ export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
       scale: 1.02,
       transition: {
         duration: 0.3,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   }
