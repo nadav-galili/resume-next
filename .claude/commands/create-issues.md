@@ -1,7 +1,7 @@
 ---
 name: create-issues
 description: Creates GitHub issues from project specs or prompts. Breaks down features into structured, actionable issues with proper labels and formatting.
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
+tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
 ---
 
 # create-issues

@@ -4,7 +4,7 @@
       "Read",
       "Write",
       "Edit",
-      "Bash(git *:*)",
+      "Bash(git :*::*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(pwd)",
@@ -19,10 +19,10 @@
       "WebFetch(domain:ai.google.dev)"
     ],
     "ask": [
-      "Bash(rm *)",
-      "Bash(del *)",
+      "Bash(rm :*)",
+      "Bash(del :*)",
       "Bash(curl:*)",
-      "Bash(mv *)",
+      "Bash(mv :*)",
       "Edit(./**/**.config)",
       "Edit(./**/**.conf)",
       "Edit(./**/**.yaml)",

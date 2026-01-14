@@ -1,7 +1,7 @@
 ---
 name: update-docs-and-commit
 description: Updates documentation files after major changes and creates a git commit
-allowed-tools: Bash, Read, Edit, Write, Glob, Grep
+tools: Bash, Read, Edit, Write, Glob, Grep
 ---
 
 # update-docs-and-commit

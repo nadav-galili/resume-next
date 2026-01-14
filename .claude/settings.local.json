@@ -3,7 +3,12 @@
     "allow": [
       "WebSearch",
       "Bash(chmod:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(claude-code doctor:*)",
+      "Bash(doctor)",
+      "Bash(cat:*)",
+      "Bash(npm run lint:*)",
+      "Bash(git add:*)"
     ]
   }
 }

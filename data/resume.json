@@ -1,0 +1,220 @@
+{
+  "personal": {
+    "name": "Nadav Galili",
+    "title": "Full-Stack Developer & Indie App Developer",
+    "bio": "Full-stack developer with 5 years of experience building production React and Node.js applications at Mobile-Brain. Passionate about creating polished mobile experiences - shipped Poker AI to iOS and Android app stores using React Native and Expo. Specialized in React Native, TypeScript, and end-to-end mobile app development.",
+    "email": "nadav@example.com",
+    "location": "Tel Aviv, Israel",
+    "links": {
+      "linkedin": "https://linkedin.com/in/nadav-galili",
+      "github": "https://github.com/nadav-galili"
+    }
+  },
+  "professional": [
+    {
+      "company": "Mobile-Brain",
+      "role": "Full-Stack Developer",
+      "duration": "5 years",
+      "startDate": "2020-01-01",
+      "description": "Leading development of enterprise web applications using React, Node.js, and TypeScript. Built scalable systems serving thousands of users with focus on performance and reliability.",
+      "achievements": [
+        {
+          "title": "Architected React Component Library",
+          "description": "Built and maintained a comprehensive React component library used across multiple products, reducing development time by 40%",
+          "metrics": "40% faster development"
+        },
+        {
+          "title": "Optimized Application Performance",
+          "description": "Reduced initial page load time from 4.2s to 1.1s through code splitting, lazy loading, and bundle optimization",
+          "metrics": "74% improvement in load time",
+          "impact": "Improved user retention by 28%"
+        },
+        {
+          "title": "Led TypeScript Migration",
+          "description": "Spearheaded migration of legacy JavaScript codebase to TypeScript, establishing type-safe patterns and reducing runtime errors by 60%",
+          "metrics": "60% reduction in runtime errors"
+        },
+        {
+          "title": "Implemented CI/CD Pipeline",
+          "description": "Built automated testing and deployment pipeline with GitHub Actions, reducing deployment time from hours to minutes",
+          "metrics": "90% faster deployments",
+          "impact": "Enabled daily releases"
+        }
+      ],
+      "techStack": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "AWS",
+        "Docker",
+        "Redis",
+        "GraphQL"
+      ],
+      "location": "Tel Aviv, Israel"
+    }
+  ],
+  "indieProjects": [
+    {
+      "name": "Poker AI: HomeStack",
+      "tagline": "Your personal AI poker coach for home games",
+      "description": "A mobile-first poker tracking and coaching app that helps casual players improve their game. Built with React Native and Expo, featuring real-time hand tracking, AI-powered insights, and beautiful visualizations. Shipped to both iOS App Store and Google Play Store.",
+      "platforms": ["iOS", "Android"],
+      "features": [
+        {
+          "icon": "brain",
+          "title": "AI-Powered Insights",
+          "description": "Get personalized recommendations based on your playing style and hand history using advanced analytics"
+        },
+        {
+          "icon": "chart-bar",
+          "title": "Hand Tracking",
+          "description": "Quickly log hands during your games with an intuitive mobile interface optimized for speed"
+        },
+        {
+          "icon": "graduation-cap",
+          "title": "Personal Coach",
+          "description": "Learn from detailed post-game analysis highlighting mistakes and missed opportunities"
+        },
+        {
+          "icon": "trending-up",
+          "title": "Statistics & Trends",
+          "description": "Track your progress over time with beautiful charts showing win rates, position analysis, and more"
+        }
+      ],
+      "techStack": [
+        {
+          "name": "React Native",
+          "category": "mobile"
+        },
+        {
+          "name": "Expo",
+          "category": "mobile"
+        },
+        {
+          "name": "TypeScript",
+          "category": "mobile"
+        },
+        {
+          "name": "Firebase",
+          "category": "backend"
+        },
+        {
+          "name": "Firestore",
+          "category": "database"
+        },
+        {
+          "name": "React Navigation",
+          "category": "mobile"
+        },
+        {
+          "name": "Victory Charts",
+          "category": "frontend"
+        }
+      ],
+      "buildNotes": {
+        "architecture": [
+          "Built with Expo managed workflow for rapid iteration and over-the-air updates",
+          "Implemented offline-first architecture using AsyncStorage and sync queues",
+          "Modular component architecture with atomic design principles",
+          "Custom hook system for business logic separation and reusability"
+        ],
+        "performance": [
+          "Optimized FlatList rendering for 10,000+ hand history with virtualization",
+          "Implemented React.memo and useMemo strategically to prevent unnecessary re-renders",
+          "Used react-native-reanimated for 60fps animations on charts and transitions",
+          "Lazy loaded heavy screens and components to reduce initial bundle size"
+        ],
+        "deployment": [
+          "Set up EAS Build for cloud-based iOS and Android builds",
+          "Configured over-the-air updates with Expo Updates for instant bug fixes",
+          "Implemented staged rollouts to test updates with small user groups first",
+          "Automated App Store and Play Store submission process with Fastlane"
+        ],
+        "tradeoffs": [
+          "Chose Expo managed workflow for faster development over bare React Native for maximum control",
+          "Used Firebase instead of custom backend to focus on mobile experience and ship faster",
+          "Implemented client-side analytics calculations to reduce backend costs (trade: slower initial load)",
+          "Limited offline functionality to core features to reduce complexity"
+        ],
+        "challenges": [
+          "Handling edge cases in hand history parsing and validation",
+          "Optimizing chart rendering performance with large datasets",
+          "Managing app state across offline/online transitions",
+          "Balancing feature richness with app size constraints for mobile"
+        ],
+        "learnings": [
+          "Importance of designing for offline-first from day one",
+          "Value of comprehensive error boundaries and crash reporting (Sentry)",
+          "Mobile users expect instant feedback - optimistic updates are critical",
+          "App Store review process requires patience and attention to guidelines"
+        ]
+      },
+      "links": {
+        "appStore": "https://apps.apple.com/app/poker-ai-homestack/id123456789",
+        "playStore": "https://play.google.com/store/apps/details?id=com.pokerai.homestack",
+        "github": "https://github.com/nadav-galili/poker-ai"
+      },
+      "metrics": {
+        "downloads": "1,000+",
+        "rating": 4.5,
+        "users": "500+",
+        "activeUsers": "200+ monthly"
+      },
+      "featured": true
+    }
+  ],
+  "skills": {
+    "mobile": [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "React Navigation",
+      "React Native Reanimated",
+      "Expo Updates",
+      "EAS Build",
+      "iOS Development",
+      "Android Development",
+      "Mobile UX Design"
+    ],
+    "fullStack": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "REST APIs",
+      "GraphQL",
+      "Tailwind CSS",
+      "Framer Motion",
+      "State Management (Zustand, Redux)",
+      "React Query"
+    ],
+    "backend": [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Firebase",
+      "MongoDB",
+      "Redis",
+      "AWS (S3, Lambda, EC2)",
+      "Docker",
+      "Nginx"
+    ],
+    "tools": [
+      "Git",
+      "GitHub Actions",
+      "Fastlane",
+      "Jest",
+      "React Testing Library",
+      "ESLint",
+      "Prettier",
+      "Sentry",
+      "Mixpanel",
+      "Figma"
+    ]
+  },
+  "meta": {
+    "lastUpdated": "2026-01-14",
+    "version": "1.0.0"
+  }
+}
