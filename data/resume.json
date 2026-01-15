@@ -64,22 +64,26 @@
         {
           "icon": "brain",
           "title": "AI-Powered Insights",
-          "description": "Get personalized recommendations based on your playing style and hand history using advanced analytics"
+          "description": "Get personalized recommendations based on your playing style and hand history using advanced analytics",
+          "image": "/images/poker-ai/feature-1.webp"
         },
         {
           "icon": "chart-bar",
           "title": "Hand Tracking",
-          "description": "Quickly log hands during your games with an intuitive mobile interface optimized for speed"
+          "description": "Quickly log hands during your games with an intuitive mobile interface optimized for speed",
+          "image": "/images/poker-ai/feature-2.webp"
         },
         {
           "icon": "graduation-cap",
           "title": "Personal Coach",
-          "description": "Learn from detailed post-game analysis highlighting mistakes and missed opportunities"
+          "description": "Learn from detailed post-game analysis highlighting mistakes and missed opportunities",
+          "image": "/images/poker-ai/feature-3.webp"
         },
         {
           "icon": "trending-up",
           "title": "Statistics & Trends",
-          "description": "Track your progress over time with beautiful charts showing win rates, position analysis, and more"
+          "description": "Track your progress over time with beautiful charts showing win rates, position analysis, and more",
+          "image": "/images/poker-ai/feature-4.webp"
         }
       ],
       "techStack": [

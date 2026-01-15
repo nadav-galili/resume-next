@@ -4,6 +4,58 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - Poker AI Screenshots Integration
+
+### Added
+- **5 WebP screenshots** added to `/public/images/poker-ai/`:
+  - `hero-screenshot.webp` - Main app screenshot (543KB)
+  - `feature-1.webp` - AI-Powered Insights (824KB)
+  - `feature-2.webp` - Hand Tracking (919KB)
+  - `feature-3.webp` - Personal Coach (864KB)
+  - `feature-4.webp` - Statistics & Trends (767KB)
+- **Image field** added to Feature interface in `types/resume.ts`
+- **Feature hover previews** - Screenshots fade in as background on hover (20% opacity)
+- **Enhanced 2D device mockup** with hover effects (scale + glow)
+
+### Changed
+- **DeviceMockup3D component**:
+  - Fixed hydration mismatch by initializing 3D state to `false`
+  - Improved texture loading with proper error handling and console logging
+  - Configured THREE.js textures with `SRGBColorSpace` and linear filtering
+  - Switched screen mesh from `RoundedBox` to `plane` geometry for proper UV mapping
+  - Temporarily disabled 3D mode in favor of reliable 2D fallback
+  - Added hover animations (scale and glow effects) to 2D fallback
+- **IndieProjectsSection component**:
+  - Updated to use `hero-screenshot.webp` for device mockup
+  - Enhanced FeatureCard to display background images on hover
+  - Added `image` prop to feature cards
+- **resume.json data**:
+  - Added `image` paths to all 4 feature objects
+- **poker-ai README.md**:
+  - Updated to reflect actual WebP files
+  - Documented component usage and image guidelines
+
+### Fixed
+- **Image loading issues** - Resolved texture rendering problems in 3D component
+- **Browser caching** - Cleared Next.js build cache to ensure fresh compilation
+- **TypeScript types** - Added `image?: string` to Feature interface
+
+### Technical Details
+- **Image format**: WebP chosen for optimal web performance (25-50% smaller than PNG)
+- **Total image size**: ~3.9MB for 5 screenshots (optimized for web)
+- **Texture loading**: THREE.TextureLoader with success/error callbacks
+- **2D fallback**: Enhanced with CSS transitions and hover effects
+- **Performance**: Images lazy-loaded, displayed only when component in view
+- **Browser compatibility**: WebP supported by all modern browsers and THREE.js
+
+### User Experience
+- Hero screenshot displays immediately in iPhone device frame
+- Feature cards show preview images on hover for visual context
+- Smooth transitions create polished, professional feel
+- All images maintain aspect ratio and display correctly
+
+---
+
 ## 2026-01-14 - Phases 2-4 Complete: MVP Feature Complete
 
 ### Status

@@ -1,25 +1,31 @@
 # Poker AI Screenshots
 
-Place your Poker AI app screenshots in this directory.
+All Poker AI app screenshots for the resume web app.
 
-## Required Files for Components
+## Current Files
 
-- `screenshot-home.png` - Main app screenshot for 3D device mockup (used in IndieProjectsSection)
-- Additional screenshots for other views (optional)
+- `hero-screenshot.webp` - Main app screenshot for 3D device mockup (used in IndieProjectsSection)
+- `feature-1.webp` - Feature showcase screenshot #1
+- `feature-2.webp` - Feature showcase screenshot #2
+- `feature-3.webp` - Feature showcase screenshot #3
+- `feature-4.webp` - Feature showcase screenshot #4
 
-## Recommended Files
+## Component Usage
 
-- `hero-screenshot.png` - Main hero image (1920x1080 or similar)
-- `feature-1.png` - AI insights feature screenshot
-- `feature-2.png` - Hand tracking interface
-- `feature-3.png` - Statistics dashboard
-- `feature-4.png` - Coach analysis view
-- `app-icon.png` - App icon (1024x1024)
+### IndieProjectsSection.tsx
+- Uses `hero-screenshot.webp` in the 3D device mockup
+- Path: `/images/poker-ai/hero-screenshot.webp`
+
+### Future Usage
+- Feature screenshots can be used in:
+  - BuildNotesSection (code walkthrough backgrounds)
+  - Feature cards (hover previews)
+  - Image galleries or carousels
 
 ## Image Guidelines
 
-- Format: PNG or WebP
-- Optimize images before adding (use tools like TinyPNG)
-- Include both light and dark mode screenshots if applicable
-- Use device mockups for a professional look
-- Max dimensions: 1920x1080 for wide screenshots
+- **Format**: WebP (optimized for web performance)
+- **Optimization**: All images are pre-optimized
+- **Responsive**: Images should work well on mobile and desktop
+- **Max dimensions**: 1920x1080 for hero images, smaller for features
+- **Device mockups**: Consider showing app in device frames for professional look

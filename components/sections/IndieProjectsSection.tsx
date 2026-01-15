@@ -62,11 +62,13 @@ function FeatureCard({
   icon,
   title,
   description,
+  image,
   index,
 }: {
   icon: string
   title: string
   description: string
+  image?: string
   index: number
 }) {
   const Icon = iconMap[icon as keyof typeof iconMap] || Brain
@@ -80,14 +82,26 @@ function FeatureCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="group border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-lg hover:shadow-primary/5">
-        <CardHeader>
+      <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-lg hover:shadow-primary/5">
+        {/* Background Image (shown on hover) */}
+        {image && (
+          <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-20">
+            <img
+              src={image}
+              alt={title}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        <CardHeader className="relative z-10">
           <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
             <Icon className="h-6 w-6" />
           </div>
           <CardTitle className="text-lg">{title}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative z-10">
           <CardDescription className="text-sm leading-relaxed">
             {description}
           </CardDescription>
@@ -196,7 +210,7 @@ export default function IndieProjectsSection() {
             <Suspense fallback={<DeviceMockupSkeleton />}>
               <DeviceMockup3D
                 platform="ios"
-                screenshot="/images/poker-ai/screenshot-home.png"
+                screenshot="/images/poker-ai/hero-screenshot.webp"
                 enableRotation={true}
               />
             </Suspense>
@@ -296,6 +310,7 @@ export default function IndieProjectsSection() {
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
+                image={feature.image}
                 index={index}
               />
             ))}

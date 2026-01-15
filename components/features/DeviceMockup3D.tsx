@@ -40,10 +40,32 @@ function DeviceFrame({
   useEffect(() => {
     if (screenshot) {
       const loader = new THREE.TextureLoader()
-      loader.load(screenshot, (loadedTexture) => {
-        setTexture(loadedTexture)
-      })
+      loader.load(
+        screenshot,
+        (loadedTexture) => {
+          // Configure texture
+          loadedTexture.colorSpace = THREE.SRGBColorSpace
+          loadedTexture.minFilter = THREE.LinearFilter
+          loadedTexture.magFilter = THREE.LinearFilter
+
+          setTexture(loadedTexture)
+          console.log('✓ Texture loaded successfully:', screenshot)
+        },
+        undefined,
+        (error) => {
+          // Error callback
+          console.error('✗ Error loading texture:', screenshot, error)
+        }
+      )
     }
+
+    // Cleanup: dispose texture on unmount
+    return () => {
+      if (texture) {
+        texture.dispose()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenshot])
 
   // Animate rotation based on scroll
@@ -82,22 +104,19 @@ function DeviceFrame({
       </RoundedBox>
 
       {/* Screen */}
-      <RoundedBox
-        args={[
-          deviceWidth - screenInset,
-          deviceHeight - screenInset,
-          deviceDepth * 0.5,
-        ]}
-        radius={borderRadius * 0.8}
-        smoothness={4}
-        position={[0, 0, deviceDepth * 0.26]}
-      >
+      <mesh position={[0, 0, deviceDepth * 0.26]}>
+        <planeGeometry
+          args={[deviceWidth - screenInset, deviceHeight - screenInset]}
+        />
         {texture ? (
-          <meshStandardMaterial map={texture} />
+          <meshStandardMaterial
+            map={texture}
+            toneMapped={false}
+          />
         ) : (
           <meshStandardMaterial color="#000000" />
         )}
-      </RoundedBox>
+      </mesh>
 
       {/* Notch for iOS */}
       {platform === 'ios' && (
@@ -174,7 +193,7 @@ function Scene({
   )
 }
 
-// 2D Fallback Component
+// 2D Fallback Component (Enhanced with animations)
 function FallbackDevice({
   platform,
   screenshot,
@@ -184,9 +203,13 @@ function FallbackDevice({
   screenshot?: string
   className?: string
 }) {
+  useEffect(() => {
+    console.log('FallbackDevice rendering with screenshot:', screenshot)
+  }, [screenshot])
+
   return (
     <div
-      className={`relative mx-auto ${className || ''}`}
+      className={`relative mx-auto transition-transform duration-700 hover:scale-105 ${className || ''}`}
       style={{
         width: platform === 'ios' ? '280px' : '300px',
         maxWidth: '100%',
@@ -194,7 +217,7 @@ function FallbackDevice({
     >
       {/* Device Frame */}
       <div
-        className={`relative overflow-hidden bg-[#1c1c1e] shadow-2xl ${
+        className={`relative overflow-hidden bg-[#1c1c1e] shadow-2xl transition-shadow duration-300 hover:shadow-primary/20 ${
           platform === 'ios' ? 'rounded-[3rem]' : 'rounded-[2rem]'
         }`}
         style={{
@@ -208,6 +231,8 @@ function FallbackDevice({
             src={screenshot}
             alt={`${platform} device screenshot`}
             className="h-full w-full object-cover"
+            onLoad={() => console.log('✓ Image loaded successfully')}
+            onError={(e) => console.error('✗ Image failed to load:', e)}
           />
         ) : (
           <div className="h-full w-full bg-black" />
@@ -217,6 +242,13 @@ function FallbackDevice({
         {platform === 'ios' && (
           <div className="absolute left-1/2 top-0 h-6 w-40 -translate-x-1/2 rounded-b-3xl bg-[#1c1c1e]" />
         )}
+
+        {/* Subtle glow effect on hover */}
+        <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 hover:opacity-100"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(0, 122, 255, 0.1) 0%, transparent 70%)'
+          }}
+        />
       </div>
     </div>
   )
@@ -228,20 +260,9 @@ export default function DeviceMockup3D({
   className,
   enableRotation = true,
 }: DeviceMockup3DProps) {
-  // Initialize with lazy state to avoid hydration mismatch
-  const [use3D, setUse3D] = useState(() => {
-    if (typeof window === 'undefined') return true
-
-    // Check for WebGL support
-    const canvas = document.createElement('canvas')
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    if (!gl) return false
-
-    // Check for low-end device indicators
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
-    return !(isMobile && isLowEnd)
-  })
+  // For now, always use 2D fallback for reliability
+  // TODO: Fix 3D texture rendering and re-enable
+  const use3D = false
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
     if (typeof window === 'undefined') return false

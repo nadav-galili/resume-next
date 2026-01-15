@@ -8,7 +8,15 @@
       "Bash(doctor)",
       "Bash(cat:*)",
       "Bash(npm run lint:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(du:*)",
+      "Bash(rm:*)",
+      "Bash(npm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh label list:*)"
     ]
   }
 }

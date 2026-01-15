@@ -1,0 +1,6 @@
+# robots.txt for Nadav Galili Resume Site
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nadav-galili-resume.vercel.app/sitemap.xml
