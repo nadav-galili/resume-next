@@ -4,6 +4,56 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - Phase 5: Performance Optimization
+
+### Changed
+- **Image optimization** - Replaced all native `<img>` tags with Next.js `Image` component
+  - `components/sections/IndieProjectsSection.tsx`: Feature card background images use lazy loading with responsive sizing
+  - `components/features/DeviceMockup3D.tsx`: Hero screenshot uses `priority={true}` for immediate loading
+  - Automatic WebP/AVIF format conversion based on browser support
+  - Responsive image sizing with `sizes` attribute for optimal bandwidth usage
+  - **Expected impact**: 40-60% LCP improvement, 2-3MB transfer size reduction
+
+- **Next.js configuration** - Comprehensive production optimizations in `next.config.ts`
+  - Image optimization: AVIF/WebP formats with device-specific sizes
+  - Compression enabled for all responses
+  - React strict mode enabled
+  - Package import optimization for lucide-react and framer-motion
+  - Aggressive caching headers (1 year cache for static assets)
+  - **Expected impact**: 20-30% transfer size reduction, improved repeat visit performance
+
+- **Font loading optimization** - Enhanced font loading in `app/layout.tsx`
+  - Added `display: 'swap'` to prevent FOIT (Flash of Invisible Text)
+  - Added `preload: true` for early font loading
+  - System font fallbacks for better perceived performance
+  - **Expected impact**: 100-200ms FCP improvement, no font flash
+
+- **Accessibility improvements** - `components/providers/SmoothScrollProvider.tsx`
+  - Added `prefers-reduced-motion` media query support
+  - Disables Lenis smooth scrolling if user prefers reduced motion
+  - Better respect for user accessibility preferences
+
+### Technical Details
+- **Performance targets**: Lighthouse 95+, FCP <1s, LCP <2.5s, TBT <200ms
+- **Baseline bundle size**: 13MB static assets
+- **Optimization strategy**: Image optimization first (highest ROI), followed by Next.js config and font loading
+- **Browser support**: Automatic fallback to WebP if AVIF not supported
+- **Accessibility**: WCAG AA compliance with reduced-motion support
+
+### Files Modified
+- `components/sections/IndieProjectsSection.tsx` - Next.js Image for feature cards
+- `components/features/DeviceMockup3D.tsx` - Next.js Image for device screenshot
+- `next.config.ts` - Comprehensive production configuration
+- `app/layout.tsx` - Font loading optimization
+- `components/providers/SmoothScrollProvider.tsx` - Accessibility improvements
+
+### Next Steps
+- Run Lighthouse audit to measure actual improvements
+- Consider removing React Three Fiber dependencies if bundle still too large (~500KB reduction)
+- Mobile device testing on real devices (iPhone Safari, Android Chrome)
+
+---
+
 ## 2026-01-15 - AI/LLM Tools Section Planning
 
 ### Added

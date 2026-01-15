@@ -15,6 +15,7 @@
  */
 
 import { lazy, Suspense, useRef } from 'react'
+import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import {
   Brain,
@@ -86,10 +87,14 @@ function FeatureCard({
         {/* Background Image (shown on hover) */}
         {image && (
           <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-20">
-            <img
+            <Image
               src={image}
               alt={title}
-              className="h-full w-full object-cover"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+              loading="lazy"
+              quality={85}
             />
           </div>
         )}

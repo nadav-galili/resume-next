@@ -13,6 +13,7 @@
 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useEffect, useState } from 'react'
+import Image from 'next/image'
 import * as THREE from 'three'
 import { RoundedBox } from '@react-three/drei'
 
@@ -227,10 +228,14 @@ function FallbackDevice({
       >
         {/* Screen */}
         {screenshot ? (
-          <img
+          <Image
             src={screenshot}
             alt={`${platform} device screenshot`}
-            className="h-full w-full object-cover"
+            fill
+            sizes="(max-width: 768px) 280px, 300px"
+            className="object-cover"
+            priority={true}
+            quality={90}
             onLoad={() => console.log('✓ Image loaded successfully')}
             onError={(e) => console.error('✗ Image failed to load:', e)}
           />
