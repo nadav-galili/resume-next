@@ -28,6 +28,7 @@ resume/
 │   │   ├── ProfessionalSection.tsx      # Mobile-Brain experience
 │   │   ├── IndieProjectsSection.tsx     # Poker AI showcase
 │   │   ├── BuildNotesSection.tsx        # Technical depth
+│   │   ├── AILLMToolsSection.tsx        # AI/LLM tools proficiency (Claude Code, Cursor IDE)
 │   │   ├── TechStackSection.tsx         # Skills grid
 │   │   └── ContactSection.tsx           # Links & resume downloads
 │   │
@@ -130,6 +131,7 @@ app/page.tsx (Single page, all sections)
 ├── ProfessionalSection (Mobile-Brain experience)
 ├── IndieProjectsSection (Poker AI flagship)
 ├── BuildNotesSection (Technical depth showcase)
+├── AILLMToolsSection (AI-powered development with Claude Code & Cursor IDE)
 ├── TechStackSection
 └── ContactSection
 ```
@@ -275,6 +277,7 @@ Structure:
   personal: { name, title, bio, contact, links },
   professional: { company, role, duration, achievements, techStack },
   indieProjects: [{ name, tagline, features, buildNotes, links, metrics }],
+  aiTools: { title, description, tools, workflow, results },
   skills: { mobile, fullStack, backend, tools }
 }
 ```

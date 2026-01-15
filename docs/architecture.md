@@ -254,6 +254,17 @@ All sections are **client components** (`'use client'`) for animations.
   - Before/after metrics
   - Engineering blog post aesthetic
 
+**components/sections/AILLMToolsSection.tsx**
+- Purpose: Showcase proficiency with cutting-edge AI development tools
+- Data: `aiTools.tools`, `aiTools.workflow`, `aiTools.results`
+- Features:
+  - **Tool cards** highlighting Claude Code and Cursor IDE
+  - **Workflow visualization** showing AI-augmented development process
+  - **Impact metrics** (3x faster delivery, 80% planning reduction)
+  - Glass morphism styling with hover effects
+  - Scroll-triggered animations with Framer Motion
+  - Demonstrates modern development practices and competitive advantage
+
 **components/sections/TechStackSection.tsx**
 - Purpose: Show relevant skills without overwhelming
 - Data: `skills.mobile`, `skills.fullStack`, `skills.backend`, `skills.tools`
@@ -507,6 +518,7 @@ export interface ResumeData {
   personal: PersonalInfo
   professional: ProfessionalExperience
   indieProjects: IndieProject[]
+  aiTools?: AITools
   skills: Skills
 }
 

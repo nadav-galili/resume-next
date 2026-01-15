@@ -9,6 +9,8 @@
       "Bash(cat:*)",
       "Bash(npm run lint:*)",
       "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
       "Bash(du:*)",
       "Bash(rm:*)",
       "Bash(npm run dev:*)",
@@ -16,7 +18,10 @@
       "Bash(xargs kill -9:*)",
       "Bash(gh auth:*)",
       "Bash(gh repo view:*)",
-      "Bash(gh label list:*)"
+      "Bash(gh label list:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue list:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

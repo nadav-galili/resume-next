@@ -4,6 +4,37 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - AI/LLM Tools Section Planning
+
+### Added
+- **GitHub Issue #7**: Created comprehensive feature specification for AI/LLM Tools Proficiency section
+  - Detailed technical implementation plan
+  - Content strategy for Claude Code and Cursor IDE showcase
+  - Acceptance criteria and success metrics
+  - Design specifications following App Store aesthetic
+- **Documentation updates**:
+  - `project_spec.md`: Added Section 4.5 documenting AI/LLM Tools section
+  - `CLAUDE.md`: Updated component hierarchy and data structure to include `AILLMToolsSection`
+  - Planning document created with complete implementation roadmap
+
+### Planned
+- **AILLMToolsSection component**: New section to showcase AI-powered development workflow
+  - Claude Code capabilities (feature planning, multi-agent orchestration, code review)
+  - Cursor IDE features (AI-assisted completion, intelligent refactoring)
+  - Workflow visualization (Planning → Implementation → Review → Documentation)
+  - Impact metrics (3x faster delivery, 80% reduction in planning overhead)
+- **Data structure**: `aiTools` field in `resume.json` with tools, workflow steps, and results
+- **TypeScript interfaces**: `AITool`, `WorkflowStep`, and `AITools` types
+
+### Technical Details
+- **Section placement**: Between BuildNotesSection and TechStackSection
+- **Design pattern**: Tool cards with glass morphism, workflow arrows, results showcase
+- **Animation**: Framer Motion scroll-triggered reveals, staggered card animations
+- **Content focus**: Modern AI development practices, productivity multipliers, competitive advantage
+- **Target audience**: Forward-thinking hiring managers valuing cutting-edge tools
+
+---
+
 ## 2026-01-15 - Poker AI Screenshots Integration
 
 ### Added

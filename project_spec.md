@@ -93,6 +93,7 @@ Build a **stunning, mobile-first resume web app** styled like an **App Store pro
 - `ProfessionalSection` - Mobile-Brain experience timeline
 - `IndieProjectsSection` - Poker AI showcase with 3D phone mockups
 - `BuildNotesSection` - Tabbed/accordion interface with code snippets
+- `AILLMToolsSection` - AI-powered development tools showcase (Claude Code, Cursor IDE)
 - `TechStackSection` - Animated grid of tech logos
 - `ContactSection` - Links, email, download resume buttons
 
@@ -133,6 +134,7 @@ resume/
 │   │   ├── ProfessionalSection.tsx
 │   │   ├── IndieProjectsSection.tsx
 │   │   ├── BuildNotesSection.tsx
+│   │   ├── AILLMToolsSection.tsx
 │   │   ├── TechStackSection.tsx
 │   │   └── ContactSection.tsx
 │   │
@@ -628,6 +630,60 @@ export interface Skills {
 - Before/after metrics
 - Clean, scannable layout
 - Engineering blog post aesthetic
+
+---
+
+### 4.5. AI/LLM Tools (Modern Development)
+
+**Purpose**: Showcase proficiency with cutting-edge AI development tools and demonstrate modern, AI-augmented development workflow
+
+**Content**:
+
+#### Tools Highlighted
+1. **Claude Code**
+   - Advanced AI agent for planning complex features
+   - Multi-agent orchestration for complex workflows
+   - Code generation with architectural awareness
+   - Automated code reviews and optimization
+   - Technical documentation generation
+   - **Impact**: "Reduced feature planning time by 80%, enabling faster iteration and higher quality implementations"
+
+2. **Cursor IDE**
+   - AI-native code editor for intelligent code completion
+   - Context-aware multi-file editing
+   - AI-assisted refactoring and debugging
+   - Natural language to code generation
+   - Rapid prototyping and iteration
+   - **Impact**: "3x faster code delivery with maintained quality and consistency"
+
+#### AI-Augmented Workflow
+Visualized step-by-step process:
+1. **Planning** → Use Claude Code to break down complex features into actionable tasks
+2. **Implementation** → Leverage Cursor IDE for rapid, context-aware code generation
+3. **Review** → AI-assisted code review for quality and best practices
+4. **Documentation** → Automatically generate comprehensive technical docs
+
+#### Results & Metrics
+- "3x faster feature delivery time"
+- "80% reduction in planning overhead"
+- "70% faster prototyping cycles"
+- "Near-zero architectural debt from proper AI guidance"
+- "Comprehensive documentation with minimal manual effort"
+
+**Design**:
+- Tool cards with hover effects and glass morphism styling
+- Workflow visualization with arrow connectors
+- Results showcase with checkmarks/icons
+- App Store aesthetic (gradient accents, depth shadows)
+- Responsive grid (2 columns desktop, 1 column mobile)
+- Framer Motion scroll animations
+
+**Why This Matters**:
+- Demonstrates **modern development practices** with cutting-edge tools
+- Shows **productivity multiplier** through AI-augmented workflow
+- Proves ability to **leverage AI** as a force multiplier, not replacement
+- Appeals to **forward-thinking** hiring managers
+- Highlights **competitive advantage** in fast-paced environments
 
 ---
 
