@@ -4,6 +4,28 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - Image Quality Configuration Fix
+
+### Fixed
+- **Next.js image quality warnings** - Configured supported quality levels
+  - Added `qualities: [75, 85, 90]` to `next.config.ts` images configuration
+  - Resolved console warnings: "Image with src ... is using quality 85/90 which is not configured"
+  - All images now load with explicitly configured quality levels
+
+### Technical Details
+- **Quality levels**:
+  - 75 - Default quality for standard images
+  - 85 - Feature card images (better detail while maintaining performance)
+  - 90 - Hero screenshot (maximum sharpness for flagship project display)
+- **Impact**: Eliminated 5+ warnings per page load in development
+- **Performance**: No change to actual image quality (already using these levels)
+- **Configuration**: One-line addition to Next.js config
+
+### Files Modified
+- `next.config.ts` - Added qualities array to images configuration
+
+---
+
 ## 2026-01-15 - Section Components Polish & Visual Enhancements
 
 ### Changed
