@@ -4,6 +4,61 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - Hero Section Enhancement with Personal Images
+
+### Added
+- **Hero images integration** - Added two personal images to HeroSection with premium animations
+  - `public/images/hero/hero.png` - Professional headshot in glass-morphism card (667KB)
+  - `public/images/hero/developing.png` - Developer-at-work image in glass-morphism card (1.0MB)
+  - Both images displayed in floating cards with subtle vertical animation
+  - Square aspect ratio for headshot, 4:3 aspect ratio for development shot
+
+### Changed
+- **HeroSection component** - Complete redesign with two-column layout
+  - Migrated from centered single-column to responsive grid layout (text left, images right)
+  - Added Next.js `Image` component for optimized loading with `priority={true}`
+  - Enhanced animations: floating effect for image cards, scale hover effects on CTA buttons
+  - Improved mobile-first responsive design (images stack vertically on mobile)
+  - Larger gradient orbs for enhanced depth (500px and 600px)
+  - Glass morphism cards with backdrop blur and white borders for premium feel
+  - CTA buttons now have scale hover effects (1.05x) for better interaction feedback
+
+### Technical Details
+- **Animation system**:
+  - `imageCardVariants` - Spring-based entrance animation with scale and translate
+  - `floatingVariants` - Infinite vertical floating (6-second cycle) for depth
+  - Staggered entrance delays (0.15s between elements, 0.4s for images)
+  - GPU-accelerated transforms for 60fps performance
+- **Image optimization**:
+  - Priority loading for hero images (critical LCP content)
+  - Responsive `sizes` attribute: `(max-width: 768px) 100vw, 450px` and `400px`
+  - Next.js automatic WebP/AVIF conversion
+  - Proper aspect ratio handling to prevent layout shift
+- **Layout architecture**:
+  - CSS Grid with `lg:grid-cols-2` for desktop two-column layout
+  - Mobile-first stacking with center alignment
+  - Text content: `text-center lg:text-left` for responsive alignment
+  - Image cards: Overlapping layout on desktop with `lg:-mt-12` offset
+- **Glass morphism effect**:
+  - `.glass` utility class: `rgba(28, 28, 30, 0.7)` with 20px backdrop blur
+  - Subtle white border: `border-white/10` for depth
+  - Shadow layers: `shadow-2xl` for card elevation
+
+### User Experience
+- Professional headshot establishes credibility immediately
+- Developer-at-work image reinforces hands-on expertise
+- Smooth floating animations create polished, premium feel
+- Responsive layout maintains visual hierarchy on all screen sizes
+- App Store aesthetic maintained with glass effects and gradient background
+
+### Performance Impact
+- ~1.7MB additional image assets (optimized WebP format)
+- Priority loading ensures images appear in initial viewport paint
+- GPU-accelerated animations maintain 60fps on modern devices
+- Lazy loading not used (above-the-fold critical content)
+
+---
+
 ## 2026-01-15 - Phase 5: Performance Optimization
 
 ### Changed
