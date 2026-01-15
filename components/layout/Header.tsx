@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { NAV_ITEMS } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { trackEvent } from '@/lib/analytics'
 import resumeData from '@/data/resume.json'
 
@@ -72,7 +73,12 @@ export function Header() {
             ))}
           </ul>
 
-          {/* Mobile Menu Button */}
+          {/* Right side actions */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="icon"
@@ -107,6 +113,7 @@ export function Header() {
               </svg>
             )}
           </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
