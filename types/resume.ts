@@ -92,6 +92,36 @@ export interface IndieProject {
   featured?: boolean
 }
 
+// AI/LLM Tools
+export interface AITool {
+  name: string
+  category: string
+  icon: string
+  description: string
+  capabilities: string[]
+  impact: string
+}
+
+export interface WorkflowStep {
+  step: number
+  title: string
+  description: string
+  icon: string
+}
+
+export interface AIToolsResult {
+  metric: string
+  label: string
+}
+
+export interface AITools {
+  title: string
+  description: string
+  tools: AITool[]
+  workflow: WorkflowStep[]
+  results: AIToolsResult[]
+}
+
 // Skills
 export interface Skills {
   mobile: string[]
@@ -109,6 +139,7 @@ export interface ResumeData {
   personal: PersonalInfo
   professional: ProfessionalExperience[]
   indieProjects: IndieProject[]
+  aiTools?: AITools
   skills: Skills
   meta?: {
     lastUpdated: string

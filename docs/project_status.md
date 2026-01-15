@@ -1,6 +1,6 @@
 # Project Status - Resume Web App
 
-**Last Updated:** January 15, 2026 (Light/Dark Mode Complete)
+**Last Updated:** January 15, 2026 (AI/LLM Tools Section Added)
 **Target Launch:** TBD (MVP Complete - Optimizations Pending)
 **Project Start:** January 2026
 
@@ -241,7 +241,7 @@
 7. ⬜ **Optimize remaining images** - Convert to WebP/AVIF, proper sizing
 
 **Optional Enhancements (Post-MVP):**
-- Add AILLMToolsSection (GitHub issue #7) - Showcase Claude Code & Cursor IDE
+- ✅ ~~Add AILLMToolsSection (GitHub issue #7) - Showcase Claude Code & Cursor IDE~~ (DONE)
 - Implement AI chatbot (Phase 2 feature from original plan)
 - Add more micro-interactions and animations
 - Create blog/case studies section
