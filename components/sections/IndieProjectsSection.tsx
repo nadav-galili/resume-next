@@ -34,6 +34,7 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import AppStoreBadge from '@/components/features/AppStoreBadge'
+import FeatureShowcase from '@/components/features/FeatureShowcase'
 import resumeData from '@/data/resume.json'
 
 // Lazy load 3D component for better performance
@@ -314,7 +315,7 @@ export default function IndieProjectsSection() {
           </div>
         </div>
 
-        {/* Features Grid */}
+        {/* Feature Showcase - Tab-based gallery with large screenshots */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -324,18 +325,7 @@ export default function IndieProjectsSection() {
           <h4 className="mb-8 text-center text-2xl font-bold text-foreground">
             Key Features
           </h4>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {project.features.map((feature, index) => (
-              <FeatureCard
-                key={feature.title}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-                image={feature.image}
-                index={index}
-              />
-            ))}
-          </div>
+          <FeatureShowcase features={project.features} />
         </motion.div>
 
         {/* Tech Stack */}
