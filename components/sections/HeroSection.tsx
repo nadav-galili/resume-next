@@ -166,7 +166,8 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               <Button
                 onClick={handleScrollToWork}
                 size="lg"
-                className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-6 text-base min-w-[200px] h-12 shadow-2xl hover:shadow-xl transition-all hover:scale-105"
+                className="bg-white text-[oklch(60%_0.22_250)] hover:bg-white/90 font-semibold px-8 py-6 text-base min-w-[200px] h-12 shadow-2xl hover:shadow-xl transition-all hover:scale-105"
+                aria-label="View my work and projects"
               >
                 View My Work
               </Button>

@@ -35,12 +35,8 @@ import {
 } from '@/components/ui/card'
 import AppStoreBadge from '@/components/features/AppStoreBadge'
 import FeatureShowcase from '@/components/features/FeatureShowcase'
+import DeviceMockup from '@/components/features/DeviceMockup'
 import resumeData from '@/data/resume.json'
-
-// Lazy load 3D component for better performance
-const DeviceMockup3D = lazy(
-  () => import('@/components/features/DeviceMockup3D')
-)
 
 // Icon mapping for features
 const iconMap = {
@@ -48,15 +44,6 @@ const iconMap = {
   'chart-bar': BarChart,
   'graduation-cap': GraduationCap,
   'trending-up': TrendingUp,
-}
-
-// Device Mockup Skeleton (fallback while loading)
-function DeviceMockupSkeleton() {
-  return (
-    <div className="flex h-[600px] items-center justify-center">
-      <div className="relative h-[500px] w-[280px] animate-pulse rounded-[3rem] bg-card/50 shadow-2xl" />
-    </div>
-  )
 }
 
 // Feature Card Component
@@ -222,20 +209,17 @@ export default function IndieProjectsSection() {
 
         {/* Main Content: Two-column layout */}
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column: 3D Device Mockup */}
+          {/* Left Column: Device Mockup */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="flex items-center justify-center"
           >
-            <Suspense fallback={<DeviceMockupSkeleton />}>
-              <DeviceMockup3D
-                platform="ios"
-                screenshot="/images/poker-ai/hero-screenshot.webp"
-                enableRotation={true}
-              />
-            </Suspense>
+            <DeviceMockup
+              platform="ios"
+              screenshot="/images/poker-ai/hero-screenshot.webp"
+            />
           </motion.div>
 
           {/* Right Column: Project Details */}

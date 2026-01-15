@@ -51,7 +51,7 @@ export function Header() {
             href="#hero"
             className="text-lg md:text-xl font-semibold text-white hover:text-primary transition-colors"
             onClick={() => handleNavClick('Logo', '#hero')}
-            aria-label="Go to top of page"
+            aria-label={`${resumeData.personal.name} - Go to top of page`}
           >
             {resumeData.personal.name}
           </Link>

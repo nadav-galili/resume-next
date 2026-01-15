@@ -59,12 +59,13 @@ export function CodeSnippet({
           variant="outline"
           size="icon-sm"
           onClick={handleCopy}
+          aria-label={copied ? "Code copied to clipboard" : "Copy code to clipboard"}
           className="opacity-0 group-hover:opacity-100 transition-opacity bg-card/80 backdrop-blur-sm border-border/50 hover:bg-card"
         >
           {copied ? (
-            <Check className="size-3.5" />
+            <Check className="size-3.5" aria-hidden="true" />
           ) : (
-            <Copy className="size-3.5" />
+            <Copy className="size-3.5" aria-hidden="true" />
           )}
         </Button>
       </div>
