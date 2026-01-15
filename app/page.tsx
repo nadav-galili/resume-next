@@ -2,6 +2,7 @@ import HeroSection from '@/components/sections/HeroSection'
 import { ProfessionalSection } from '@/components/sections/ProfessionalSection'
 import IndieProjectsSection from '@/components/sections/IndieProjectsSection'
 import { BuildNotesSection } from '@/components/sections/BuildNotesSection'
+import AILLMToolsSection from '@/components/sections/AILLMToolsSection'
 import { TechStackSection } from '@/components/sections/TechStackSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import resumeData from '@/data/resume.json'
@@ -25,6 +26,9 @@ export default function Home() {
 
       {/* Build Notes - Technical Depth */}
       <BuildNotesSection />
+
+      {/* AI/LLM Tools - Development Workflow */}
+      <AILLMToolsSection />
 
       {/* Tech Stack - Skills Grid */}
       <TechStackSection />

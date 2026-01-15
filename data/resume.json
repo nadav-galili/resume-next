@@ -168,6 +168,80 @@
       "featured": true
     }
   ],
+  "aiTools": {
+    "title": "AI-Powered Development",
+    "description": "Leveraging cutting-edge AI tools to deliver high-quality features faster while maintaining architectural integrity",
+    "tools": [
+      {
+        "name": "Claude Code",
+        "category": "AI Planning & Architecture",
+        "icon": "brain",
+        "description": "Advanced AI agent for planning complex features, generating implementation plans, and architecting solutions with deep codebase understanding.",
+        "capabilities": [
+          "Feature planning and task breakdown",
+          "Multi-agent orchestration for complex workflows",
+          "Code generation with architectural awareness",
+          "Automated code reviews and optimization",
+          "Technical documentation generation"
+        ],
+        "impact": "80% reduction in planning time"
+      },
+      {
+        "name": "Cursor IDE",
+        "category": "AI-Native Development",
+        "icon": "code",
+        "description": "AI-native code editor for intelligent code completion, refactoring, and rapid prototyping with full codebase context.",
+        "capabilities": [
+          "Context-aware code completion",
+          "Multi-file intelligent editing",
+          "AI-assisted refactoring",
+          "Natural language to code generation",
+          "Rapid bug fixing and debugging"
+        ],
+        "impact": "3x faster code delivery"
+      }
+    ],
+    "workflow": [
+      {
+        "step": 1,
+        "title": "Planning",
+        "description": "Use Claude Code to break down features into well-structured tasks",
+        "icon": "clipboard-list"
+      },
+      {
+        "step": 2,
+        "title": "Implementation",
+        "description": "Leverage Cursor IDE for rapid, context-aware development",
+        "icon": "code"
+      },
+      {
+        "step": 3,
+        "title": "Review",
+        "description": "AI-assisted code review catches issues early",
+        "icon": "search"
+      },
+      {
+        "step": 4,
+        "title": "Documentation",
+        "description": "Auto-generate comprehensive technical docs",
+        "icon": "file-text"
+      }
+    ],
+    "results": [
+      {
+        "metric": "3x",
+        "label": "Faster Delivery"
+      },
+      {
+        "metric": "80%",
+        "label": "Less Planning Time"
+      },
+      {
+        "metric": "70%",
+        "label": "Faster Prototyping"
+      }
+    ]
+  },
   "skills": {
     "mobile": [
       "React Native",
