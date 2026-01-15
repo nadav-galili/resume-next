@@ -10,7 +10,18 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import {
+  Trophy,
+  Zap,
+  Code2,
+  Rocket,
+  TrendingUp,
+  CheckCircle2,
+} from 'lucide-react'
 import type { ProfessionalExperience } from '@/types/resume'
+
+// Icon mapping for achievements
+const achievementIcons = [Trophy, Zap, Code2, Rocket]
 
 interface ProfessionalSectionProps {
   experience: ProfessionalExperience
@@ -59,9 +70,12 @@ export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
     <section
       id="professional"
       ref={ref}
-      className="relative py-20 scroll-mt-20"
+      className="relative overflow-hidden py-20 scroll-mt-20"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {/* Background gradient overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -127,26 +141,41 @@ export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
           animate={isInView ? 'show' : 'hidden'}
           className="mb-12 grid gap-6 sm:grid-cols-2"
         >
-          {experience.achievements.map((achievement, index) => (
-            <motion.div
-              key={achievement.title}
-              variants={itemVariants}
-              whileHover="hover"
-              initial="rest"
-              className="h-full"
-            >
-              <motion.div variants={cardHoverVariants} className="h-full">
-                <Card className="group h-full border-border/50 transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/5">
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">
-                      {achievement.title}
-                    </CardTitle>
-                    {achievement.metrics && (
-                      <div className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                        {achievement.metrics}
+          {experience.achievements.map((achievement, index) => {
+            const Icon = achievementIcons[index % achievementIcons.length]
+            return (
+              <motion.div
+                key={achievement.title}
+                variants={itemVariants}
+                whileHover="hover"
+                initial="rest"
+                className="h-full"
+              >
+                <motion.div variants={cardHoverVariants} className="h-full">
+                  <Card className="group h-full border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-card/80 hover:shadow-lg hover:shadow-primary/10">
+                    <CardHeader>
+                      <div className="mb-3 flex items-center gap-3">
+                        <motion.div
+                          initial={{ scale: 1 }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                          className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/20"
+                        >
+                          <Icon className="h-6 w-6" />
+                        </motion.div>
+                        <div className="flex-1">
+                          <CardTitle className="text-lg sm:text-xl">
+                            {achievement.title}
+                          </CardTitle>
+                        </div>
                       </div>
-                    )}
-                  </CardHeader>
+                      {achievement.metrics && (
+                        <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary ring-1 ring-primary/20">
+                          <CheckCircle2 className="h-3.5 w-3.5" />
+                          {achievement.metrics}
+                        </div>
+                      )}
+                    </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-3 leading-relaxed">
                       {achievement.description}
@@ -165,7 +194,8 @@ export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
                 </Card>
               </motion.div>
             </motion.div>
-          ))}
+          )
+        })}
         </motion.div>
 
         {/* Tech Stack Section */}

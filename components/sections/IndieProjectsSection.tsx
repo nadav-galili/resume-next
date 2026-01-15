@@ -185,7 +185,23 @@ export default function IndieProjectsSection() {
       ref={ref}
     >
       {/* Background gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
+
+      {/* Additional gradient orbs for depth */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 0.15, scale: 1 } : {}}
+          transition={{ duration: 2, ease: 'easeOut' }}
+          className="absolute left-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-primary/20 blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 0.1, scale: 1 } : {}}
+          transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
+          className="absolute bottom-1/3 right-1/4 h-[500px] w-[500px] rounded-full bg-primary/15 blur-3xl"
+        />
+      </div>
 
       <div className="container relative mx-auto px-4 md:px-6">
         {/* Section Header */}

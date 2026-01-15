@@ -84,20 +84,27 @@ export function ContactSection() {
 
           {/* Social Links */}
           <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-            {socialLinks.map((link) => (
+            {socialLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
                 target={link.name !== 'Email' ? '_blank' : undefined}
                 rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
                 onClick={() => handleLinkClick(link.name, link.href)}
-                className="group flex items-center gap-3 rounded-lg bg-background px-6 py-3 transition-all hover:bg-accent hover:shadow-lg hover:shadow-primary/10"
-                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group flex items-center gap-3 rounded-xl border border-border/50 bg-background/50 px-6 py-4 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-background/80 hover:shadow-lg hover:shadow-primary/10"
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="text-primary transition-transform group-hover:scale-110">
+                <motion.div
+                  className="text-primary transition-transform"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                >
                   {link.icon}
-                </div>
+                </motion.div>
                 <span className="font-medium text-foreground">{link.label}</span>
               </motion.a>
             ))}
@@ -105,13 +112,21 @@ export function ContactSection() {
 
           {/* Download Buttons */}
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            {downloadLinks.map((link) => (
-              <motion.div key={link.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            {downloadLinks.map((link, index) => (
+              <motion.div
+                key={link.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   variant={link.variant}
                   size="lg"
                   asChild
-                  className="min-w-[200px] gap-2"
+                  className="min-w-[200px] gap-2 shadow-lg hover:shadow-xl transition-shadow"
                 >
                   <a
                     href={link.href}
@@ -138,9 +153,20 @@ export function ContactSection() {
           </motion.p>
         </motion.div>
 
-        {/* Background Gradient Effect */}
+        {/* Background Gradient Effects */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: 'easeOut' }}
+            className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
+            className="absolute bottom-1/4 right-1/4 h-[600px] w-[600px] translate-x-1/2 translate-y-1/2 rounded-full bg-primary/10 blur-3xl"
+          />
         </div>
       </div>
     </section>
