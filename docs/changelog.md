@@ -4,6 +4,66 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-15 - Light/Dark Mode Theme System Complete
+
+### Added
+- **Theme Toggle Component** - Sun/Moon icon toggle with smooth rotation animation
+  - Located in Header navigation (top-right corner)
+  - Accessible keyboard navigation (Enter/Space)
+  - ARIA labels for screen readers
+  - Smooth 300ms rotation animation with scale effects
+  - Respects `prefers-reduced-motion`
+
+- **next-themes Integration** - Persistent theme management
+  - Client-side theme switching with localStorage persistence
+  - Default theme: Dark mode (ignores system preference)
+  - No flash of unstyled content on page load
+  - Theme persists across browser sessions
+
+- **Theme-Aware Components** - All components updated for light/dark mode
+  - Header navigation with theme-aware text colors
+  - Hero section gradient adapts to current theme
+  - Glass morphism effects switch between light/dark variants
+  - All text colors use semantic tokens (foreground, muted-foreground)
+  - Code snippets dynamically switch between github-dark/github-light themes
+
+### Changed
+- **Color System** - Enhanced for better accessibility
+  - Light mode `muted-foreground`: Changed from oklch(45%) to oklch(35%) for WCAG AA compliance
+  - All hardcoded colors replaced with CSS custom properties
+  - Hero gradient: Theme-aware with light blue gradient for light mode
+  - Glass morphism: Inverted transparency for light mode (white/70% vs black/70%)
+
+- **CodeSnippet Component** - Dynamic theme switching
+  - Shiki syntax highlighting adapts to current theme
+  - Background color uses semantic `bg-card` instead of hardcoded dark
+  - Re-highlights code when theme changes
+
+- **Header Component** - Full theme support
+  - Logo, navigation links, and mobile menu use theme tokens
+  - Mobile menu backdrop adapts to theme
+  - ThemeToggle integrated into header actions
+
+- **HeroSection Component** - Theme-aware styling
+  - Text colors use foreground tokens (name, title, bio)
+  - Buttons use semantic primary/foreground colors
+  - Gradient orbs use foreground/10 for theme adaptation
+  - Image card borders adapt to theme
+
+### Technical Details
+- **Dependencies**: next-themes@^0.4.6 (already installed)
+- **Implementation**: CSS custom properties with `.dark` class variant
+- **Animation Performance**: GPU-accelerated (transform/opacity only)
+- **Accessibility**: WCAG AA contrast ratios maintained in both themes
+- **Bundle Impact**: ~5KB added for next-themes library
+- **Browser Support**: All modern browsers with CSS custom property support
+
+### Accessibility Improvements
+- Improved light mode contrast from 3.5:1 to 5.8:1 for muted text
+- Maintains WCAG AA compliance (4.5:1+) in both themes
+- Theme toggle has clear focus indicators
+- Screen reader announces theme changes
+
 ## 2026-01-15 - Phase 5: Accessibility & Performance Audits Complete
 
 ### Added

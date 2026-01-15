@@ -50,7 +50,7 @@ export function Header() {
           {/* Logo/Name */}
           <Link
             href="#hero"
-            className="text-lg md:text-xl font-semibold text-white hover:text-primary transition-colors"
+            className="text-lg md:text-xl font-semibold text-foreground hover:text-primary transition-colors"
             onClick={() => handleNavClick('Logo', '#hero')}
             aria-label={`${resumeData.personal.name} - Go to top of page`}
           >
@@ -63,7 +63,7 @@ export function Header() {
               <li key={item.href} role="none">
                 <a
                   href={item.href}
-                  className="text-sm font-medium text-white/80 hover:text-white transition-colors"
+                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                   onClick={() => handleNavClick(item.label, item.href)}
                   role="menuitem"
                 >
@@ -82,7 +82,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white"
+            className="md:hidden text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
@@ -119,7 +119,7 @@ export function Header() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div
-            className="md:hidden absolute top-16 left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/10"
+            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border"
             role="menu"
           >
             <ul className="py-4 px-4 space-y-2">
@@ -127,7 +127,7 @@ export function Header() {
                 <li key={item.href} role="none">
                   <a
                     href={item.href}
-                    className="block py-3 px-4 text-base font-medium text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                    className="block py-3 px-4 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors"
                     onClick={() => handleNavClick(item.label, item.href)}
                     role="menuitem"
                   >

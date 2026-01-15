@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { codeToHtml } from "shiki"
+import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Check, Copy } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -21,14 +22,19 @@ export function CodeSnippet({
 }: CodeSnippetProps) {
   const [html, setHtml] = React.useState<string>("")
   const [copied, setCopied] = React.useState(false)
+  const { theme } = useTheme()
+
+  // Determine the current theme
+  const isDark = theme === 'dark'
 
   React.useEffect(() => {
     const highlightCode = async () => {
       try {
         // Shiki's codeToHtml produces safe, sanitized HTML output
+        // Use theme-aware Shiki theme
         const highlighted = await codeToHtml(code, {
           lang: language,
-          theme: "github-dark",
+          theme: isDark ? "github-dark" : "github-light",
         })
         setHtml(highlighted)
       } catch (error) {
@@ -39,7 +45,7 @@ export function CodeSnippet({
     }
 
     highlightCode()
-  }, [code, language])
+  }, [code, language, isDark])
 
   const handleCopy = async () => {
     try {
@@ -74,7 +80,7 @@ export function CodeSnippet({
       <div
         className={cn(
           "rounded-lg overflow-hidden",
-          "bg-[#0d1117] border border-border/50",
+          "bg-card border border-border/50",
           "shadow-lg",
           showLineNumbers && "[&_pre]:pl-12"
         )}

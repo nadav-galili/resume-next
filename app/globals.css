@@ -60,7 +60,7 @@
   --secondary: oklch(96% 0 0);             /* Light gray */
   --secondary-foreground: oklch(0% 0 0);   /* Black text */
   --muted: oklch(96% 0 0);                 /* Light gray muted bg */
-  --muted-foreground: oklch(45% 0 0);      /* Gray text #737373 */
+  --muted-foreground: oklch(35% 0 0);      /* Darker gray for better contrast #595959 */
   --accent: oklch(60% 0.22 250);           /* iOS blue accent */
   --accent-foreground: oklch(100% 0 0);    /* White text on accent */
   --destructive: oklch(0.577 0.245 27.325);
@@ -128,23 +128,26 @@
 
 /* App Store Custom Classes */
 @layer utilities {
-  /* Hero gradient - iOS blue to purple */
+  /* Hero gradient - theme-aware */
   .hero-gradient {
+    background: linear-gradient(135deg, oklch(90% 0.1 250) 0%, oklch(85% 0.08 280) 100%);
+  }
+
+  .dark .hero-gradient {
     background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
   }
 
-  /* Glass morphism effect */
+  /* Glass morphism effect - theme-aware */
   .glass {
-    background: rgba(28, 28, 30, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Light mode glass */
-  .glass-light {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .glass {
+    background: rgba(28, 28, 30, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   /* Smooth scrolling */

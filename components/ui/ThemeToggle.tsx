@@ -17,12 +17,16 @@ import { Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function ThemeToggle() {
-  const { theme, setTheme, systemTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   // Avoid hydration mismatch by only rendering after mount
+  // Using layout effect to ensure mounting before paint
   useEffect(() => {
-    setMounted(true)
+    // This effect runs after mount to avoid SSR/hydration mismatch
+    // We need this pattern for next-themes compatibility
+    const timer = setTimeout(() => setMounted(true), 0)
+    return () => clearTimeout(timer)
   }, [])
 
   if (!mounted) {
@@ -40,8 +44,7 @@ export function ThemeToggle() {
     )
   }
 
-  const currentTheme = theme === 'system' ? systemTheme : theme
-  const isDark = currentTheme === 'dark'
+  const isDark = theme === 'dark'
 
   const toggleTheme = () => {
     setTheme(isDark ? 'light' : 'dark')

@@ -114,13 +114,13 @@ export default function HeroSection({ personal }: HeroSectionProps) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 0.3, scale: 1 }}
           transition={{ duration: 2, ease: 'easeOut' }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-foreground/10 rounded-full blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 0.2, scale: 1 }}
           transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
-          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-white/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-foreground/10 rounded-full blur-3xl"
         />
       </div>
 
@@ -137,7 +137,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
             {/* Name */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 tracking-tight"
             >
               {personal.name}
             </motion.h1>
@@ -145,7 +145,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
             {/* Title */}
             <motion.h2
               variants={itemVariants}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/90 mb-6"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground/90 mb-6"
             >
               {personal.title}
             </motion.h2>
@@ -153,7 +153,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
             {/* Bio */}
             <motion.p
               variants={itemVariants}
-              className="text-sm sm:text-base md:text-lg text-white/80 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
+              className="text-sm sm:text-base md:text-lg text-foreground/80 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
             >
               {personal.bio}
             </motion.p>
@@ -166,7 +166,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               <Button
                 onClick={handleScrollToWork}
                 size="lg"
-                className="bg-white text-[oklch(60%_0.22_250)] hover:bg-white/90 font-semibold px-8 py-6 text-base min-w-[200px] h-12 shadow-2xl hover:shadow-xl transition-all hover:scale-105"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 py-6 text-base min-w-[200px] h-12 shadow-2xl hover:shadow-xl transition-all hover:scale-105"
                 aria-label="View my work and projects"
               >
                 View My Work
@@ -177,7 +177,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
                 variant="outline"
                 size="lg"
                 onClick={handleDownloadResume}
-                className="bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white backdrop-blur-sm font-semibold px-8 py-6 text-base min-w-[200px] h-12 hover:scale-105 transition-all"
+                className="bg-foreground/10 text-foreground border-foreground/30 hover:bg-foreground/20 hover:text-foreground backdrop-blur-sm font-semibold px-8 py-6 text-base min-w-[200px] h-12 hover:scale-105 transition-all"
               >
                 <a
                   href="/resume/nadav-galili-resume.pdf"
@@ -203,7 +203,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               <motion.div
                 variants={floatingVariants}
                 animate="animate"
-                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10"
               >
                 <div className="aspect-square relative">
                   <Image
@@ -229,7 +229,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
                 variants={floatingVariants}
                 animate="animate"
                 style={{ animationDelay: '1s' }}
-                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -254,8 +254,8 @@ export default function HeroSection({ personal }: HeroSectionProps) {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
         onClick={handleScrollToWork}
       >
-        <span className="text-white/70 text-sm font-medium">Scroll to explore</span>
-        <ChevronDown className="w-6 h-6 text-white/70" />
+        <span className="text-foreground/70 text-sm font-medium">Scroll to explore</span>
+        <ChevronDown className="w-6 h-6 text-foreground/70" />
       </motion.div>
     </section>
   )

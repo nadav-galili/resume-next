@@ -1,6 +1,6 @@
 # Project Status - Resume Web App
 
-**Last Updated:** January 15, 2026 (Phase 5: Audits Complete)
+**Last Updated:** January 15, 2026 (Light/Dark Mode Complete)
 **Target Launch:** TBD (MVP Complete - Optimizations Pending)
 **Project Start:** January 2026
 
@@ -121,6 +121,13 @@
 - ✅ Image quality configuration - Configured qualities [75, 85, 90] to eliminate warnings
 - ✅ **Accessibility audit (WCAG AA)** - Complete analysis, 97.5/100 score, 3 minor fixes identified
 - ✅ **Lighthouse performance audit** - Comprehensive report, baseline established, optimization roadmap created
+- ✅ **Light/Dark Mode Theme System** - Full theme toggle with localStorage persistence
+  - ThemeToggle component with Sun/Moon icons
+  - All components updated with theme-aware colors
+  - Improved light mode contrast (WCAG AA compliant)
+  - Code snippets dynamically switch themes (github-dark/light)
+  - Default: Dark mode (ignores system preference)
+  - Theme persists across browser sessions
 
 **Audit Results:**
 - **Accessibility**: 91/100 (WCAG AA Compliant)
