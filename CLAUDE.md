@@ -474,3 +474,8 @@ When editing or suggesting changes:
 - `types/resume.ts`: TypeScript interfaces for resume data structure
 - Update files in the docs folder after major milestones and major additions to the project.
 - Use the /update-docs-and-commit slash commands when making git commits.
+
+## Plan Mode
+
+- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+- At the end of each plan, give me a list of unresolved questions to answer, if any.
