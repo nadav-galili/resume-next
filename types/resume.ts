@@ -71,6 +71,7 @@ export interface ProjectMetrics {
   users?: string
   stars?: number
   activeUsers?: string
+  impact?: string
 }
 
 export interface TechStack {
