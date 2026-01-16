@@ -30,7 +30,9 @@
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_resize",
       "Bash(gh issue close 8 --repo nadav-galili/resume-next --comment \"$\\(cat <<''EOF''\n## ✅ Issue Completed\n\n### Summary of Changes\n\n**MobileMenuButton - Complete Redesign:**\n- Changed from 4-dot grid to classic hamburger/X icon\n- Three horizontal lines \\(2.5px × 24px\\) that morph into X with spring physics\n- Proper z-index stacking: button at z-[110], appears above overlay\n- Theme-aware colors using `bg-foreground` for proper contrast in both light and dark modes\n- Button background adapts: `bg-foreground/10` \\(light\\) / `bg-white/20` \\(dark\\) when open\n\n**MobileMenuOverlay - Enhanced Coverage & Effects:**\n- Fixed viewport coverage issues when menu opened from scrolled position\n- Added `100dvh` height for proper mobile viewport handling\n- Added `isolate` class for new stacking context\n- Changed clip-path radius from `150%` to `200vh` for guaranteed full coverage\n- Added frosted glass effect: `bg-background/90 backdrop-blur-2xl`\n\n**Bug Fixes:**\n- Close button \\(X\\) now visible in both light and dark modes\n- Overlay fully covers page content regardless of scroll position\n- Background blur effect works correctly\n- Fixed lint errors in useReducedMotion hooks\n\n### Files Modified\n- `components/layout/MobileMenu/MobileMenuButton.tsx`\n- `components/layout/MobileMenu/MobileMenuOverlay.tsx`\n- `components/layout/MobileMenu/MobileMenuItem.tsx`\n- `components/layout/MobileMenu/index.tsx`\n- `docs/changelog.md`\n\n### Commit\nc829497 - fix: improve mobile menu UX with hamburger/X button and overlay fixes \\(Issue #8\\)\nEOF\n\\)\")",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(python3:*)",
+      "Bash(npx lighthouse:*)"
     ]
   }
 }

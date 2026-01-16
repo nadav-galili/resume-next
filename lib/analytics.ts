@@ -1,29 +1,42 @@
 /**
  * Analytics utilities for tracking user interactions
- * Uses Mixpanel for event tracking
+ * Uses Mixpanel for event tracking with lazy loading for better performance
  */
-
-import mixpanel from 'mixpanel-browser'
 
 // Get Mixpanel token from environment variables
 const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
 
 // Track if analytics has been initialized
 let isInitialized = false
+let mixpanelInstance: typeof import('mixpanel-browser') | null = null
+
+/**
+ * Lazy load Mixpanel library
+ * Only loads the library when first needed
+ */
+const getMixpanel = async () => {
+  if (!mixpanelInstance && typeof window !== 'undefined') {
+    mixpanelInstance = await import('mixpanel-browser')
+  }
+  return mixpanelInstance
+}
 
 /**
  * Initialize Mixpanel analytics
  * Call this once in the root layout or app component
  */
-export const initAnalytics = () => {
+export const initAnalytics = async () => {
   if (MIXPANEL_TOKEN && !isInitialized) {
-    mixpanel.init(MIXPANEL_TOKEN, {
-      debug: process.env.NODE_ENV === 'development',
-      track_pageview: true,
-      persistence: 'localStorage',
-    })
-    isInitialized = true
-    console.log('Mixpanel analytics initialized')
+    const mixpanel = await getMixpanel()
+    if (mixpanel) {
+      mixpanel.default.init(MIXPANEL_TOKEN, {
+        debug: process.env.NODE_ENV === 'development',
+        track_pageview: true,
+        persistence: 'localStorage',
+      })
+      isInitialized = true
+      console.log('Mixpanel analytics initialized')
+    }
   } else if (!MIXPANEL_TOKEN) {
     console.warn('Mixpanel token not found - analytics disabled')
   }
@@ -34,12 +47,12 @@ export const initAnalytics = () => {
  * @param eventName - Name of the event to track
  * @param properties - Optional properties to attach to the event
  */
-export const trackEvent = (
+export const trackEvent = async (
   eventName: string,
   properties?: Record<string, unknown>
 ) => {
-  if (MIXPANEL_TOKEN && isInitialized) {
-    mixpanel.track(eventName, properties)
+  if (MIXPANEL_TOKEN && isInitialized && mixpanelInstance) {
+    mixpanelInstance.default.track(eventName, properties)
   }
 }
 
@@ -129,14 +142,14 @@ export const trackScrollDepth = (depth: number) => {
  * @param userId - Unique identifier for the user
  * @param traits - Optional user traits
  */
-export const identifyUser = (
+export const identifyUser = async (
   userId: string,
   traits?: Record<string, unknown>
 ) => {
-  if (MIXPANEL_TOKEN && isInitialized) {
-    mixpanel.identify(userId)
+  if (MIXPANEL_TOKEN && isInitialized && mixpanelInstance) {
+    mixpanelInstance.default.identify(userId)
     if (traits) {
-      mixpanel.people.set(traits)
+      mixpanelInstance.default.people.set(traits)
     }
   }
 }
@@ -145,7 +158,7 @@ export const identifyUser = (
  * Reset analytics state (useful for testing)
  */
 export const resetAnalytics = () => {
-  if (MIXPANEL_TOKEN && isInitialized) {
-    mixpanel.reset()
+  if (MIXPANEL_TOKEN && isInitialized && mixpanelInstance) {
+    mixpanelInstance.default.reset()
   }
 }

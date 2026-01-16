@@ -135,11 +135,13 @@
   - Fix time: ~10 minutes total
   - Expected score after fixes: 96-98/100 ✅
 
-- **Performance**: 62/100 (Needs Improvement) - *Note: Audit was based on incorrect assumptions*
-  - LCP: 6.3s ❌ (Target: 2.5s) - Critical issue
-  - *Audit incorrectly identified React Three Fiber (never installed) and Lenis (never installed)*
-  - Actual stack uses: 2D CSS mockups, native smooth scroll, optimized Framer Motion imports
-  - **Re-audit recommended** to get accurate performance baseline
+- **Performance**: 60/100 (Improved from 56) - *After Mixpanel lazy loading*
+  - FCP: 1.7s ✅ (improved from 1.9s)
+  - LCP: 5.6s ❌ (improved from 6.2s, Target: 2.5s) - Still needs work
+  - TBT: 690ms ❌ (Target: 200ms)
+  - CLS: 0 ✅ (Perfect)
+  - Speed Index: 3.6s (improved from 4.2s)
+  - Unused JS: 24KB (down from 108KB)
 
 - **Best Practices**: 100/100 ✅ (Perfect)
 - **SEO**: 100/100 ✅ (Perfect)
@@ -149,9 +151,11 @@
 - ✅ Framer Motion - **Already optimized** via `optimizePackageImports` in next.config.ts
 - ✅ CSS Smooth Scroll - **Already implemented** (no Lenis library, using native `scroll-behavior: smooth`)
 - ✅ Removed unused `@types/three` dependency (cleanup)
+- ✅ **Mixpanel lazy loading** - Reduced unused JS from 108KB to 24KB
+- ✅ **Hero image optimization** - Secondary image now lazy loaded
+- ✅ **Fresh Lighthouse audit** - Score improved from 56 to 60
 - 🟡 Fix 3 accessibility issues (~10 min)
 - ⬜ Mobile testing (iPhone Safari, Android Chrome, LinkedIn in-app)
-- ⬜ Run fresh Lighthouse audit to get updated performance score
 
 ---
 

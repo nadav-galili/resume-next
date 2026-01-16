@@ -4,6 +4,36 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-16 - Performance Optimizations (Mixpanel Lazy Loading)
+
+### Changed
+- **Mixpanel Analytics** - Implemented lazy loading for better initial page performance
+  - Changed from static import to dynamic `import('mixpanel-browser')`
+  - Uses `requestIdleCallback` to defer loading until browser is idle
+  - Fallback to 1-second timeout for browsers without `requestIdleCallback`
+  - **Result**: Unused JS reduced from 108KB to 24KB (-84KB)
+
+- **Hero Images** - Optimized loading priority
+  - Main hero image: Keeps `priority` loading (above-the-fold)
+  - Secondary image: Changed from `priority` to `loading="lazy"`
+  - Reduces initial page load by ~1MB
+
+### Performance Results
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Performance Score | 56 | 60 | +4 points |
+| FCP | 1.9s | 1.7s | -200ms |
+| LCP | 6.2s | 5.6s | -600ms |
+| Speed Index | 4.2s | 3.6s | -600ms |
+| Unused JS | 108KB | 24KB | -84KB |
+
+### Files Modified
+- `lib/analytics.ts` - Lazy loading with dynamic imports
+- `components/providers/AnalyticsProvider.tsx` - requestIdleCallback integration
+- `components/sections/HeroSection.tsx` - Secondary image lazy loading
+
+---
+
 ## 2026-01-16 - Performance Audit Verification
 
 ### Verified (Already Optimized)

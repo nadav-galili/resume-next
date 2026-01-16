@@ -236,7 +236,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
                     src="/images/hero/developing.png"
                     alt={`${personal.name} - Developing software`}
                     fill
-                    priority
+                    loading="lazy"
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 400px"
                   />
