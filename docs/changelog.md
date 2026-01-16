@@ -4,6 +4,21 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-16 - Accessibility Fix (Scroll Indicator)
+
+### Fixed
+- **Scroll indicator accessibility** - Changed from `<div>` to semantic `<button>` element
+  - Added `aria-label="Scroll to professional experience section"` for screen readers
+  - Added `aria-hidden="true"` on decorative ChevronDown icon
+  - Added focus-visible ring for keyboard navigation
+  - Proper button styling (transparent background, no border)
+  - WCAG AA compliant: Interactive elements must use semantic HTML
+
+### Files Modified
+- `components/sections/HeroSection.tsx` - Scroll indicator semantic fix
+
+---
+
 ## 2026-01-16 - Performance Optimizations (Mixpanel Lazy Loading)
 
 ### Changed
