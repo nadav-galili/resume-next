@@ -207,7 +207,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               >
                 <div className="aspect-square relative">
                   <Image
-                    src="/images/hero/hero.png"
+                    src="/images/hero/hero.webp"
                     alt={`${personal.name} - Professional headshot`}
                     fill
                     priority
@@ -233,7 +233,7 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               >
                 <div className="aspect-[4/3] relative">
                   <Image
-                    src="/images/hero/developing.png"
+                    src="/images/hero/developing.webp"
                     alt={`${personal.name} - Developing software`}
                     fill
                     loading="lazy"
