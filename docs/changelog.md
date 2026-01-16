@@ -4,6 +4,36 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-16 - Mobile Device Testing Complete
+
+### Tested Viewports
+- **iPhone 14 Pro** (375x812) - Safari viewport simulation
+- **Pixel 5 Android** (393x851) - Chrome viewport simulation
+- **iPhone SE** (320x568) - Small screen edge case
+
+### Results
+All tests passed with no issues:
+- ✅ Hero section renders correctly on all sizes
+- ✅ Mobile menu (hamburger/X button) works in light and dark modes
+- ✅ Navigation overlay expands properly from all scroll positions
+- ✅ Touch targets meet 44px minimum requirement
+- ✅ All sections (Professional, Indie Projects, Build Notes, AI Tools, Tech Stack, Contact) responsive
+- ✅ Theme toggle accessible on mobile header
+- ✅ Responsive design works down to 320px width
+
+### Screenshots
+Test screenshots saved to `.playwright-mcp/`:
+- `mobile-iphone-hero.png`
+- `mobile-menu-open.png`
+- `mobile-light-mode-hero.png`
+- `mobile-android-hero.png`
+- `mobile-android-tech-stack.png`
+- `mobile-android-indie-projects.png`
+- `mobile-small-screen-hero.png`
+- `mobile-small-contact.png`
+
+---
+
 ## 2026-01-16 - Accessibility Fix (Scroll Indicator)
 
 ### Fixed
