@@ -248,15 +248,17 @@ export default function HeroSection({ personal }: HeroSectionProps) {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      <motion.button
+        type="button"
+        aria-label="Scroll to professional experience section"
         variants={scrollIndicatorVariants}
         animate="animate"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 bg-transparent border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg p-2"
         onClick={handleScrollToWork}
       >
         <span className="text-foreground/70 text-sm font-medium">Scroll to explore</span>
-        <ChevronDown className="w-6 h-6 text-foreground/70" />
-      </motion.div>
+        <ChevronDown className="w-6 h-6 text-foreground/70" aria-hidden="true" />
+      </motion.button>
     </section>
   )
 }
