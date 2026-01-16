@@ -12,12 +12,13 @@ interface MobileMenuOverlayProps {
 
 // Hook to detect reduced motion preference
 function useReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  })
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
-
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
     mediaQuery.addEventListener('change', handler)
     return () => mediaQuery.removeEventListener('change', handler)
@@ -64,7 +65,7 @@ export function MobileMenuOverlay({ onClose }: MobileMenuOverlayProps) {
           opacity: 0,
         },
         open: {
-          clipPath: 'circle(150% at calc(100% - 44px) 44px)',
+          clipPath: 'circle(200vh at calc(100% - 44px) 44px)',
           opacity: 1,
         },
       }
@@ -99,7 +100,16 @@ export function MobileMenuOverlay({ onClose }: MobileMenuOverlayProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
-      className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] isolate"
+      style={{
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: 'fixed',
+        height: '100dvh',
+        width: '100vw',
+      }}
       variants={overlayVariants}
       initial="closed"
       animate="open"
@@ -110,8 +120,11 @@ export function MobileMenuOverlay({ onClose }: MobileMenuOverlayProps) {
           : { type: 'spring', stiffness: 200, damping: 25 }
       }
     >
+      {/* Blurred background layer */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-2xl" />
+
       {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
 
       {/* Navigation container */}
       <motion.nav

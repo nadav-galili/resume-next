@@ -47,7 +47,7 @@ export function MobileMenu() {
   const closeMenu = () => setIsOpen(false)
 
   return (
-    <div className="md:hidden">
+    <div className="relative z-[120] md:hidden">
       <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
       <AnimatePresence>
         {isOpen && <MobileMenuOverlay onClose={closeMenu} />}

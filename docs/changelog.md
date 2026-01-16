@@ -4,6 +4,47 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-16 - Mobile Menu UX Improvements (Issue #8)
+
+### Changed
+- **MobileMenuButton** - Complete redesign from 4-dot grid to hamburger/X icon
+  - Replaced SVG dot-based animation with CSS span-based hamburger lines
+  - Three horizontal lines (2.5px height, 24px width) that morph into X
+  - Proper z-index stacking: button z-[110], overlay z-[100], wrapper z-[120]
+  - Theme-aware colors: uses `bg-foreground` for proper contrast in light/dark modes
+  - Button background adapts: `bg-foreground/10 dark:bg-white/20` when open
+  - Spring physics animation (stiffness: 400, damping: 30)
+
+- **MobileMenuOverlay** - Enhanced full-screen coverage and visual effects
+  - Fixed viewport coverage issues when scrolled down the page
+  - Added `100dvh` height for proper mobile viewport handling
+  - Added `isolate` for new stacking context
+  - Changed clip-path radius from `150%` to `200vh` for guaranteed full coverage
+  - Added frosted glass effect: `bg-background/90 backdrop-blur-2xl`
+  - Separated background layer for reliable opacity
+
+- **MobileMenu wrapper** - Added `z-[120]` for proper stacking context
+
+### Fixed
+- Close button (X) now visible and properly contrasted in both light and dark modes
+- Overlay now fully covers page content when menu opened from scrolled position
+- Background blur effect now works correctly
+- Theme-aware styling prevents white-on-light contrast issues
+
+### Technical Details
+- **Animation**: Framer Motion with spring physics for smooth hamburger→X transition
+- **Accessibility**: Maintains `aria-expanded`, `aria-controls`, keyboard navigation
+- **Performance**: GPU-accelerated transforms (rotate, translate, scale, opacity)
+- **Reduced motion**: Supports `prefers-reduced-motion` with instant transitions
+- **Z-index hierarchy**: wrapper(120) > button(110) > overlay(100) > header(50)
+
+### Files Modified
+- `components/layout/MobileMenu/MobileMenuButton.tsx` - Hamburger/X implementation
+- `components/layout/MobileMenu/MobileMenuOverlay.tsx` - Overlay coverage fixes
+- `components/layout/MobileMenu/index.tsx` - Wrapper z-index
+
+---
+
 ## 2026-01-15 - AI/LLM Tools Proficiency Section (Issue #7)
 
 ### Added

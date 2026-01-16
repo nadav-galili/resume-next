@@ -22,7 +22,13 @@
       "Bash(gh issue create:*)",
       "Bash(gh issue list:*)",
       "Bash(npm run build:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_resize"
     ]
   }
 }
