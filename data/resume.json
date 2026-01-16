@@ -166,6 +166,102 @@
         "activeUsers": "200+ monthly"
       },
       "featured": true
+    },
+    {
+      "name": "Drivers Task Manager",
+      "tagline": "Real-time task coordination for Toyota dealership operations",
+      "description": "Full-stack Progressive Web App that replaced manual Excel workflows with a real-time kanban system. Built for Toyota agency staff - drivers, desk personnel, and managers - to coordinate vehicle logistics with instant status updates and push notifications.",
+      "platforms": ["Web"],
+      "features": [
+        {
+          "icon": "refresh-cw",
+          "title": "Real-Time Sync",
+          "description": "Instant status updates across all users - drivers, desk staff, and managers see changes immediately"
+        },
+        {
+          "icon": "bell",
+          "title": "Push Notifications",
+          "description": "Instant task assignments and status alerts keep the team coordinated throughout the day"
+        },
+        {
+          "icon": "bar-chart-2",
+          "title": "Admin Dashboard",
+          "description": "KPIs and analytics for managers to track performance and identify bottlenecks"
+        },
+        {
+          "icon": "layout",
+          "title": "Kanban Workflow",
+          "description": "Visual task board with drag-and-drop for intuitive task management"
+        }
+      ],
+      "techStack": [
+        {
+          "name": "Next.js",
+          "category": "frontend"
+        },
+        {
+          "name": "Supabase",
+          "category": "backend"
+        },
+        {
+          "name": "TypeScript",
+          "category": "frontend"
+        },
+        {
+          "name": "Tailwind CSS",
+          "category": "frontend"
+        },
+        {
+          "name": "PWA",
+          "category": "frontend"
+        },
+        {
+          "name": "Vercel",
+          "category": "devops"
+        }
+      ],
+      "buildNotes": {
+        "architecture": [
+          "Designed as a Progressive Web App for cross-platform compatibility without app store deployment",
+          "Real-time data synchronization using Supabase Realtime subscriptions",
+          "Role-based access control for drivers, desk staff, and managers",
+          "Offline-capable with service workers for field use"
+        ],
+        "performance": [
+          "Optimistic UI updates for instant feedback on task status changes",
+          "Efficient real-time subscriptions to minimize bandwidth usage",
+          "Lazy loading of dashboard analytics to prioritize core task management"
+        ],
+        "deployment": [
+          "Deployed on Vercel with automatic preview deployments for testing",
+          "Environment-based configuration for staging and production",
+          "Automated database migrations with Supabase CLI"
+        ],
+        "tradeoffs": [
+          "Chose PWA over native app to enable rapid deployment without app store review process",
+          "Used Supabase for faster development over custom backend infrastructure",
+          "Prioritized real-time sync over offline editing to match dealership workflow needs"
+        ],
+        "challenges": [
+          "Designing intuitive mobile UI for quick task updates while driving",
+          "Managing real-time state across multiple concurrent users",
+          "Balancing push notification frequency to be helpful without being intrusive"
+        ],
+        "learnings": [
+          "PWAs can effectively replace native apps for business tools",
+          "Real-time features dramatically improve team coordination",
+          "Close collaboration with end users is essential for workflow tools"
+        ]
+      },
+      "links": {
+        "website": "",
+        "github": ""
+      },
+      "metrics": {
+        "impact": "Eliminated manual Excel tracking",
+        "users": "Active daily use by dealership staff"
+      },
+      "featured": false
     }
   ],
   "aiTools": {
