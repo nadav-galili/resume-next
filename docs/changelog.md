@@ -4,6 +4,27 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-16 - Performance Audit Verification
+
+### Verified (Already Optimized)
+- **React Three Fiber** - Confirmed NEVER installed. DeviceMockup uses pure 2D CSS implementation
+- **Lenis smooth scroll** - Confirmed NEVER installed. Using native CSS `scroll-behavior: smooth`
+- **Framer Motion** - Already in `optimizePackageImports` for tree-shaking
+
+### Removed
+- `@types/three` - Unused TypeScript types (8 packages removed from node_modules)
+
+### Notes
+The previous Lighthouse audit (January 15) incorrectly identified React Three Fiber and Lenis as performance bottlenecks. These libraries were never actually installed in the project. A fresh Lighthouse audit is recommended to get an accurate performance baseline.
+
+### Technical Details
+- **Current bundle**: 13MB static chunks (mostly React, Framer Motion, Shiki)
+- **DeviceMockup.tsx**: Pure CSS with Next.js Image optimization
+- **Smooth scroll**: Native CSS in globals.css with `prefers-reduced-motion` support
+- **Framer Motion**: Optimized imports via Next.js experimental config
+
+---
+
 ## 2026-01-16 - Mobile Menu UX Improvements (Issue #8)
 
 ### Changed
