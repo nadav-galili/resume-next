@@ -32,9 +32,10 @@ interface Feature {
 
 interface FeatureShowcaseProps {
   features: Feature[]
+  isWebProject?: boolean
 }
 
-export default function FeatureShowcase({ features }: FeatureShowcaseProps) {
+export default function FeatureShowcase({ features, isWebProject = false }: FeatureShowcaseProps) {
   const [activeTab, setActiveTab] = useState(features[0]?.title || '')
 
   if (!features.length) return null
@@ -88,7 +89,8 @@ export default function FeatureShowcase({ features }: FeatureShowcaseProps) {
               <div className="flex justify-center">
                 <div
                   className={cn(
-                    'relative w-full max-w-[320px] lg:max-w-[380px]',
+                    'relative w-full',
+                    isWebProject ? 'max-w-[600px] lg:max-w-[720px]' : 'max-w-[320px] lg:max-w-[380px]',
                     'rounded-3xl border border-border/50 bg-card/50 p-3 lg:p-4',
                     'shadow-xl shadow-primary/5 backdrop-blur-sm',
                     'transition-all duration-300',
@@ -96,16 +98,22 @@ export default function FeatureShowcase({ features }: FeatureShowcaseProps) {
                     !isActive && 'scale-95 opacity-0'
                   )}
                 >
-                  {/* Device frame */}
-                  <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-2xl bg-black">
+                  {/* Device/Browser frame */}
+                  <div className={cn(
+                    'relative w-full overflow-hidden rounded-2xl bg-black',
+                    isWebProject ? 'aspect-[16/9]' : 'aspect-[9/19.5]'
+                  )}>
                     {feature.image ? (
                       <Image
                         src={feature.image}
                         alt={`${feature.title} screenshot`}
                         fill
-                        sizes="(max-width: 1024px) 320px, 380px"
-                        className="object-cover"
-                        quality={90}
+                        sizes={isWebProject
+                          ? "(max-width: 1024px) 600px, 720px"
+                          : "(max-width: 1024px) 320px, 380px"
+                        }
+                        className={isWebProject ? "object-contain" : "object-cover"}
+                        quality={95}
                         priority={index === 0}
                         loading={index === 0 ? 'eager' : 'lazy'}
                       />

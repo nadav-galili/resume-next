@@ -4,6 +4,51 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-18 - Toyota SOS Images & AI Tools Branding
+
+### Added
+- **Toyota SOS feature images** - 4 WebP screenshots for Drivers Task Manager project
+  - `feature-1.webp` through `feature-4.webp` (~40-56KB each, 90%+ size reduction from PNG)
+  - Real-Time Sync, KPI Charts, Admin Dashboard, Kanban Workflow screenshots
+- **AI tool logos** - Actual brand logos for Claude Code and Cursor IDE
+  - `claude-color.svg` - Orange Claude logo
+  - `CUBE_2D_LIGHT.svg` / `CUBE_2D_DARK.svg` - Cursor cube logos for theme switching
+
+### Changed
+- **FeatureShowcase component** - Added `isWebProject` prop for different display modes
+  - Web projects: 16:9 aspect ratio, 720px max-width, `object-contain` for full image display
+  - Mobile projects: 9:19.5 phone aspect ratio, 380px max-width, `object-cover`
+  - Increased image quality to 95 and larger `sizes` prop for sharper images
+- **AILLMToolsSection component** - Theme-aware AI tool logos
+  - Claude Code: Uses actual Claude logo (`claude-color.svg`)
+  - Cursor IDE: Switches between light/dark logos based on theme
+  - Added `useTheme` hook with hydration handling
+- **IndieProjectsSection** - Passes `isWebProject` prop to FeatureShowcase
+- **resume.json** - Content updates
+  - Added feature images to Drivers Task Manager project
+  - Added "Using Ralph Wiggum for tasks breakdown, planning and execution" to Claude Code capabilities
+  - Updated skills section (Expo Api Routes, Supabase, Mysql, Jenkins)
+
+### Technical Details
+- **Image optimization**: PNG→WebP conversion with 90%+ size reduction
+- **Theme handling**: `useTheme` from next-themes with mounted state to avoid hydration mismatch
+- **Responsive images**: Larger `sizes` values (600px/720px) for web project screenshots
+- **Logo mapping**: Dynamic logo path resolution based on tool name and theme
+
+### Files Added
+- `public/images/toyota-sos/feature-1.webp` through `feature-4.webp`
+- `public/images/tech-logos/claude-color.svg`
+- `public/images/tech-logos/CUBE_2D_LIGHT.svg`
+- `public/images/tech-logos/CUBE_2D_DARK.svg`
+
+### Files Modified
+- `components/features/FeatureShowcase.tsx` - Web project display mode
+- `components/sections/AILLMToolsSection.tsx` - Theme-aware logos
+- `components/sections/IndieProjectsSection.tsx` - isWebProject prop
+- `data/resume.json` - Feature images and content updates
+
+---
+
 ## 2026-01-16 - Mobile Device Testing Complete
 
 ### Tested Viewports

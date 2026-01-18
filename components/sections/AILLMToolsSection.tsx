@@ -11,7 +11,9 @@
  * - Scroll-triggered animations
  */
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import Image from 'next/image'
+import { useTheme } from 'next-themes'
 import { motion, useInView } from 'framer-motion'
 import {
   Brain,
@@ -25,13 +27,22 @@ import {
 } from 'lucide-react'
 import resumeData from '@/data/resume.json'
 
-// Icon mapping
+// Icon mapping for workflow steps
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   brain: Brain,
   code: Code,
   'clipboard-list': ClipboardList,
   search: Search,
   'file-text': FileText,
+}
+
+// Logo paths for AI tools
+const toolLogos: Record<string, { light: string; dark: string } | string> = {
+  'Claude Code': '/images/tech-logos/claude-color.svg',
+  'Cursor IDE': {
+    light: '/images/tech-logos/CUBE_2D_LIGHT.svg',
+    dark: '/images/tech-logos/CUBE_2D_DARK.svg',
+  },
 }
 
 // Animation variants
@@ -57,6 +68,7 @@ const itemVariants = {
 // Tool Card Component
 function ToolCard({
   tool,
+  isDark,
 }: {
   tool: {
     name: string
@@ -66,18 +78,37 @@ function ToolCard({
     capabilities: string[]
     impact: string
   }
+  isDark: boolean
 }) {
   const Icon = iconMap[tool.icon] || Brain
+  const logoConfig = toolLogos[tool.name]
+
+  // Get the appropriate logo path based on theme
+  const logoPath = logoConfig
+    ? typeof logoConfig === 'string'
+      ? logoConfig
+      : isDark ? logoConfig.dark : logoConfig.light
+    : null
 
   return (
     <motion.div
       variants={itemVariants}
       className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-lg hover:shadow-primary/5 md:p-8"
     >
-      {/* Icon and Category */}
+      {/* Icon/Logo and Category */}
       <div className="mb-4 flex items-start justify-between">
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-          <Icon className="h-7 w-7" />
+          {logoPath ? (
+            <Image
+              src={logoPath}
+              alt={`${tool.name} logo`}
+              width={32}
+              height={32}
+              className="h-8 w-8"
+            />
+          ) : (
+            <Icon className="h-7 w-7" />
+          )}
         </div>
         <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
           {tool.category}
@@ -178,6 +209,14 @@ function ResultMetric({
 export default function AILLMToolsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Avoid hydration mismatch - defer state update to avoid cascading renders
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Get AI tools data from resume
   const aiTools = resumeData.aiTools
@@ -185,6 +224,8 @@ export default function AILLMToolsSection() {
   if (!aiTools) {
     return null
   }
+
+  const isDark = mounted ? theme === 'dark' : true // Default to dark during SSR
 
   return (
     <section
@@ -238,7 +279,7 @@ export default function AILLMToolsSection() {
           className="mb-20 grid gap-6 md:grid-cols-2 lg:gap-8"
         >
           {aiTools.tools.map((tool) => (
-            <ToolCard key={tool.name} tool={tool} />
+            <ToolCard key={tool.name} tool={tool} isDark={isDark} />
           ))}
         </motion.div>
 

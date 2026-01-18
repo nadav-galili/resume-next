@@ -2,7 +2,7 @@
   "personal": {
     "name": "Nadav Galili",
     "title": "Full-Stack Developer & Indie App Developer",
-    "bio": "Full-stack developer with 5 years of experience building production React and Node.js applications at Mobile-Brain. Passionate about creating polished mobile experiences - shipped Poker AI to iOS and Android app stores using React Native and Expo. Specialized in React Native, TypeScript, and end-to-end mobile app development.",
+    "bio": "Full-stack developer with 5 years of experience building production  React Native/Expo applications and Node js backend apps at Mobile-Brain. Passionate about creating  mobile and web experiences - shipped a task management Next js PWA app for a toyota agency and Poker AI app to iOS and Android app stores. Specialized in React Native, TypeScript, and end-to-end mobile and web app development.",
     "email": "nadav@example.com",
     "location": "Tel Aviv, Israel",
     "links": {
@@ -16,12 +16,17 @@
       "role": "Full-Stack Developer",
       "duration": "5 years",
       "startDate": "2020-01-01",
-      "description": "Leading development of enterprise web applications using React, Node.js, and TypeScript. Built scalable systems serving thousands of users with focus on performance and reliability.",
+      "description": "Leading development of native mobile applications using React Native/Expo, and TypeScript. Built scalable backend systems and APIs for affiliate marketing using Node js and Mysql serving hundreds of thousands of users with focus on performance and reliability.",
       "achievements": [
         {
-          "title": "Architected React Component Library",
-          "description": "Built and maintained a comprehensive React component library used across multiple products, reducing development time by 40%",
+          "title": "Architected React Native /Expo deployment pipeline",
+          "description": "Built and maintained a comprehensive React Native /Expo deployment pipeline using EAS Build and Expo Updates,with automated deployment and testing.",
           "metrics": "40% faster development"
+        },
+        {
+          "title": "Led TypeScript Migration",
+          "description": "Spearheaded migration of legacy PHP codebase to TypeScript Node js Express , establishing type-safe patterns and reducing runtime errors by 60%",
+          "metrics": "60% reduction in runtime errors"
         },
         {
           "title": "Optimized Application Performance",
@@ -30,13 +35,8 @@
           "impact": "Improved user retention by 28%"
         },
         {
-          "title": "Led TypeScript Migration",
-          "description": "Spearheaded migration of legacy JavaScript codebase to TypeScript, establishing type-safe patterns and reducing runtime errors by 60%",
-          "metrics": "60% reduction in runtime errors"
-        },
-        {
           "title": "Implemented CI/CD Pipeline",
-          "description": "Built automated testing and deployment pipeline with GitHub Actions, reducing deployment time from hours to minutes",
+          "description": "Built automated testing and deployment pipeline with Jenkins, reducing deployment time from hours to minutes",
           "metrics": "90% faster deployments",
           "impact": "Enabled daily releases"
         }
@@ -47,18 +47,19 @@
         "Node.js",
         "PostgreSQL",
         "AWS",
-        "Docker",
-        "Redis",
-        "GraphQL"
+        "Next js",
+        "React Native",
+        "Expo",
+        "MongoDB"
       ],
-      "location": "Tel Aviv, Israel"
+      "location": "Ramat Gan, Israel"
     }
   ],
   "indieProjects": [
     {
       "name": "Poker AI: HomeStack",
       "tagline": "Your personal AI poker coach for home games",
-      "description": "A mobile-first poker tracking and coaching app that helps casual players improve their game. Built with React Native and Expo, featuring real-time hand tracking, AI-powered insights, and beautiful visualizations. Shipped to both iOS App Store and Google Play Store.",
+      "description": "A mobile-first poker tracking  app that helps casual players improve their game. Built with React Native and Expo, featuring real-time game tracking, AI-powered insights, and beautiful visualizations. Shipped to both iOS App Store and Google Play Store.",
       "platforms": ["iOS", "Android"],
       "features": [
         {
@@ -98,51 +99,35 @@
         {
           "name": "TypeScript",
           "category": "mobile"
-        },
-        {
-          "name": "Firebase",
-          "category": "backend"
-        },
-        {
-          "name": "Firestore",
-          "category": "database"
-        },
-        {
-          "name": "React Navigation",
-          "category": "mobile"
-        },
-        {
-          "name": "Victory Charts",
-          "category": "frontend"
         }
       ],
       "buildNotes": {
         "architecture": [
+          "Type-Safe Schema Definition with Automatic Type Inference",
+          "Strategic Composite Indexing for Query Performance",
+          "Modular component architecture with atomic design principles",
+          "Declarative Relationships with Referential Integrity"
+        ],
+        "performance": [
           "Built with Expo managed workflow for rapid iteration and over-the-air updates",
           "Implemented offline-first architecture using AsyncStorage and sync queues",
           "Modular component architecture with atomic design principles",
           "Custom hook system for business logic separation and reusability"
         ],
-        "performance": [
-          "Optimized FlatList rendering for 10,000+ hand history with virtualization",
-          "Implemented React.memo and useMemo strategically to prevent unnecessary re-renders",
-          "Used react-native-reanimated for 60fps animations on charts and transitions",
-          "Lazy loaded heavy screens and components to reduce initial bundle size"
-        ],
         "deployment": [
           "Set up EAS Build for cloud-based iOS and Android builds",
           "Configured over-the-air updates with Expo Updates for instant bug fixes",
           "Implemented staged rollouts to test updates with small user groups first",
-          "Automated App Store and Play Store submission process with Fastlane"
+          "Automated App Store and Play Store submission process"
         ],
         "tradeoffs": [
           "Chose Expo managed workflow for faster development over bare React Native for maximum control",
-          "Used Firebase instead of custom backend to focus on mobile experience and ship faster",
+          "Used Expo Api routes instead of custom backend to focus on mobile experience and ship faster",
           "Implemented client-side analytics calculations to reduce backend costs (trade: slower initial load)",
           "Limited offline functionality to core features to reduce complexity"
         ],
         "challenges": [
-          "Handling edge cases in hand history parsing and validation",
+          "Handling edge cases in game history parsing and validation",
           "Optimizing chart rendering performance with large datasets",
           "Managing app state across offline/online transitions",
           "Balancing feature richness with app size constraints for mobile"
@@ -155,15 +140,15 @@
         ]
       },
       "links": {
-        "appStore": "https://apps.apple.com/app/poker-ai-homestack/id123456789",
-        "playStore": "https://play.google.com/store/apps/details?id=com.pokerai.homestack",
+        "appStore": "https://apps.apple.com/il/app/poker-ai-home-stack/id6754798985",
+        "playStore": "https://play.google.com/store/apps/details?id=com.pokeraihomestack.app",
         "github": "https://github.com/nadav-galili/poker-ai"
       },
       "metrics": {
-        "downloads": "1,000+",
+        "downloads": "150+",
         "rating": 4.5,
-        "users": "500+",
-        "activeUsers": "200+ monthly"
+        "users": "100+",
+        "activeUsers": "100+ monthly"
       },
       "featured": true
     },
@@ -176,22 +161,26 @@
         {
           "icon": "refresh-cw",
           "title": "Real-Time Sync",
-          "description": "Instant status updates across all users - drivers, desk staff, and managers see changes immediately"
+          "description": "Instant status updates across all users - drivers, desk staff, and managers see changes immediately",
+          "image": "/images/toyota-sos/feature-3.webp"
         },
         {
           "icon": "bell",
-          "title": "Push Notifications",
-          "description": "Instant task assignments and status alerts keep the team coordinated throughout the day"
+          "title": "Kpi Charts",
+          "description": "KPIs and analytics for managers to track performance and identify bottlenecks",
+          "image": "/images/toyota-sos/feature-2.webp"
         },
         {
           "icon": "bar-chart-2",
           "title": "Admin Dashboard",
-          "description": "KPIs and analytics for managers to track performance and identify bottlenecks"
+          "description": "KPIs and analytics for managers to track performance and identify bottlenecks",
+          "image": "/images/toyota-sos/feature-1.webp"
         },
         {
           "icon": "layout",
-          "title": "Kanban Workflow",
-          "description": "Visual task board with drag-and-drop for intuitive task management"
+          "title": "Kanban Workflow with calendar view",
+          "description": "Visual task board with drag-and-drop for intuitive task management",
+          "image": "/images/toyota-sos/feature-4.webp"
         }
       ],
       "techStack": [
@@ -274,6 +263,7 @@
         "icon": "brain",
         "description": "Advanced AI agent for planning complex features, generating implementation plans, and architecting solutions with deep codebase understanding.",
         "capabilities": [
+          "Using Ralph Wiggum for tasks breakdown, planning and execution",
           "Feature planning and task breakdown",
           "Multi-agent orchestration for complex workflows",
           "Code generation with architectural awareness",
@@ -343,7 +333,7 @@
       "React Native",
       "Expo",
       "TypeScript",
-      "React Navigation",
+      "Expo Api Routes",
       "React Native Reanimated",
       "Expo Updates",
       "EAS Build",
@@ -357,7 +347,7 @@
       "TypeScript",
       "Node.js",
       "REST APIs",
-      "GraphQL",
+      "Supabase",
       "Tailwind CSS",
       "Framer Motion",
       "State Management (Zustand, Redux)",
@@ -367,17 +357,14 @@
       "Node.js",
       "Express",
       "PostgreSQL",
-      "Firebase",
+      "Mysql",
       "MongoDB",
-      "Redis",
-      "AWS (S3, Lambda, EC2)",
-      "Docker",
-      "Nginx"
+      "AWS (S3, Lambda, EC2)"
     ],
     "tools": [
       "Git",
       "GitHub Actions",
-      "Fastlane",
+      "Jenkins",
       "Jest",
       "React Testing Library",
       "ESLint",

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * Indie Projects Section Component
@@ -15,8 +15,8 @@
  * - Scroll-triggered animations
  */
 
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Brain,
   BarChart,
@@ -31,33 +31,33 @@ import {
   Layout,
   ExternalLink,
   Zap,
-} from 'lucide-react'
+} from "lucide-react";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import AppStoreBadge from '@/components/features/AppStoreBadge'
-import FeatureShowcase from '@/components/features/FeatureShowcase'
-import DeviceMockup from '@/components/features/DeviceMockup'
-import resumeData from '@/data/resume.json'
-import type { IndieProject } from '@/types/resume'
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import AppStoreBadge from "@/components/features/AppStoreBadge";
+import FeatureShowcase from "@/components/features/FeatureShowcase";
+import DeviceMockup from "@/components/features/DeviceMockup";
+import resumeData from "@/data/resume.json";
+import type { IndieProject } from "@/types/resume";
 
 // Extended icon mapping for all features
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   brain: Brain,
-  'chart-bar': BarChart,
-  'bar-chart-2': BarChart2,
-  'graduation-cap': GraduationCap,
-  'trending-up': TrendingUp,
-  'refresh-cw': RefreshCw,
+  "chart-bar": BarChart,
+  "bar-chart-2": BarChart2,
+  "graduation-cap": GraduationCap,
+  "trending-up": TrendingUp,
+  "refresh-cw": RefreshCw,
   bell: Bell,
   layout: Layout,
   zap: Zap,
-}
+};
 
 // Feature Card Component (for projects without images)
 function FeatureCard({
@@ -66,22 +66,21 @@ function FeatureCard({
   description,
   index,
 }: {
-  icon: string
-  title: string
-  description: string
-  index: number
+  icon: string;
+  title: string;
+  description: string;
+  index: number;
 }) {
-  const Icon = iconMap[icon] || Brain
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const Icon = iconMap[icon] || Brain;
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
+      transition={{ duration: 0.5, delay: index * 0.1 }}>
       <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-lg hover:shadow-primary/5">
         <CardHeader className="relative z-10">
           <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
@@ -96,11 +95,11 @@ function FeatureCard({
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }
 
 // Feature List Component (simple grid for projects without feature images)
-function FeatureList({ features }: { features: IndieProject['features'] }) {
+function FeatureList({ features }: { features: IndieProject["features"] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {features.map((feature, index) => (
@@ -113,7 +112,7 @@ function FeatureList({ features }: { features: IndieProject['features'] }) {
         />
       ))}
     </div>
-  )
+  );
 }
 
 // Metric Display Component
@@ -123,13 +122,13 @@ function MetricDisplay({
   value,
   index,
 }: {
-  icon: React.ComponentType<{ className?: string }>
-  label: string
-  value: string
-  index: number
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  index: number;
 }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.div
@@ -137,8 +136,7 @@ function MetricDisplay({
       initial={{ opacity: 0, scale: 0.9 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="flex items-center gap-3 rounded-lg bg-card/30 p-4 backdrop-blur-sm"
-    >
+      className="flex items-center gap-3 rounded-lg bg-card/30 p-4 backdrop-blur-sm">
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
         <Icon className="h-5 w-5" />
       </div>
@@ -147,13 +145,13 @@ function MetricDisplay({
         <div className="text-sm text-muted-foreground">{label}</div>
       </div>
     </motion.div>
-  )
+  );
 }
 
 // Tech Stack Badge Component
 function TechBadge({ name, index }: { name: string; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.span
@@ -161,43 +159,41 @@ function TechBadge({ name, index }: { name: string; index: number }) {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="inline-block rounded-full border border-border/50 bg-card/50 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-md"
-    >
+      className="inline-block rounded-full border border-border/50 bg-card/50 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-card/80 hover:shadow-md">
       {name}
     </motion.span>
-  )
+  );
 }
 
 // Check if project has mobile platforms
 function isMobileProject(project: IndieProject): boolean {
   return (
-    project.platforms.includes('iOS') || project.platforms.includes('Android')
-  )
+    project.platforms.includes("iOS") || project.platforms.includes("Android")
+  );
 }
 
 // Check if project has feature images
 function hasFeatureImages(project: IndieProject): boolean {
-  return project.features.some((f) => f.image)
+  return project.features.some((f) => f.image);
 }
 
 export default function IndieProjectsSection() {
-  const projects = resumeData.indieProjects as IndieProject[]
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const projects = resumeData.indieProjects as IndieProject[];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   if (!projects.length) {
-    return null
+    return null;
   }
 
-  const selectedProject = projects[selectedIndex]
+  const selectedProject = projects[selectedIndex];
 
   return (
     <section
       id="indie-projects"
       className="relative overflow-hidden py-20 md:py-32"
-      ref={ref}
-    >
+      ref={ref}>
       {/* Background gradient */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
 
@@ -206,13 +202,13 @@ export default function IndieProjectsSection() {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 0.15, scale: 1 } : {}}
-          transition={{ duration: 2, ease: 'easeOut' }}
+          transition={{ duration: 2, ease: "easeOut" }}
           className="absolute left-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-primary/20 blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 0.1, scale: 1 } : {}}
-          transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
           className="absolute bottom-1/3 right-1/4 h-[500px] w-[500px] rounded-full bg-primary/15 blur-3xl"
         />
       </div>
@@ -223,8 +219,7 @@ export default function IndieProjectsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+          className="mb-12 text-center">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             Indie Projects
           </h2>
@@ -239,8 +234,7 @@ export default function IndieProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-12 flex justify-center"
-          >
+            className="mb-12 flex justify-center">
             <div className="inline-flex gap-2 rounded-xl border border-border/50 bg-card/30 p-1.5 backdrop-blur-sm">
               {projects.map((project, index) => (
                 <button
@@ -250,11 +244,10 @@ export default function IndieProjectsSection() {
                     relative rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-300
                     ${
                       selectedIndex === index
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:bg-card/50 hover:text-foreground'
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-card/50 hover:text-foreground"
                     }
-                  `}
-                >
+                  `}>
                   {project.name}
                 </button>
               ))}
@@ -269,20 +262,21 @@ export default function IndieProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-          >
+            transition={{ duration: 0.4 }}>
             {/* Main Content: Two-column layout for mobile apps, centered for web */}
             <div
-              className={`grid gap-12 ${isMobileProject(selectedProject) ? 'lg:grid-cols-2 lg:gap-16' : ''}`}
-            >
+              className={`grid gap-12 ${
+                isMobileProject(selectedProject)
+                  ? "lg:grid-cols-2 lg:gap-16"
+                  : ""
+              }`}>
               {/* Left Column: Device Mockup (only for mobile apps) */}
               {isMobileProject(selectedProject) && (
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="flex items-center justify-center"
-                >
+                  className="flex items-center justify-center">
                   <DeviceMockup
                     platform="ios"
                     screenshot="/images/poker-ai/hero-screenshot.webp"
@@ -292,14 +286,19 @@ export default function IndieProjectsSection() {
 
               {/* Right Column (or centered for web): Project Details */}
               <div
-                className={`flex flex-col justify-center space-y-8 ${!isMobileProject(selectedProject) ? 'mx-auto max-w-2xl text-center' : ''}`}
-              >
+                className={`flex flex-col justify-center space-y-8 ${
+                  !isMobileProject(selectedProject)
+                    ? "mx-auto max-w-2xl text-center"
+                    : ""
+                }`}>
                 {/* Project Title & Tagline */}
                 <motion.div
-                  initial={{ opacity: 0, x: isMobileProject(selectedProject) ? 50 : 0 }}
+                  initial={{
+                    opacity: 0,
+                    x: isMobileProject(selectedProject) ? 50 : 0,
+                  }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                >
+                  transition={{ duration: 0.7, delay: 0.3 }}>
                   {/* Platform Badge for Web projects */}
                   {!isMobileProject(selectedProject) && (
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
@@ -323,8 +322,9 @@ export default function IndieProjectsSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
-                  className={`flex flex-wrap gap-4 ${!isMobileProject(selectedProject) ? 'justify-center' : ''}`}
-                >
+                  className={`flex flex-wrap gap-4 ${
+                    !isMobileProject(selectedProject) ? "justify-center" : ""
+                  }`}>
                   {/* Mobile app badges */}
                   {selectedProject.links.appStore && (
                     <AppStoreBadge
@@ -349,27 +349,12 @@ export default function IndieProjectsSection() {
                           href={selectedProject.links.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2"
-                        >
+                          className="inline-flex items-center gap-2">
                           <ExternalLink className="h-4 w-4" />
                           Visit Website
                         </a>
                       </Button>
                     )}
-
-                  {/* GitHub link (for any project type) */}
-                  {selectedProject.links.github && (
-                    <Button asChild variant="outline" size="lg">
-                      <a
-                        href={selectedProject.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2"
-                      >
-                        View Source
-                      </a>
-                    </Button>
-                  )}
                 </motion.div>
 
                 {/* Metrics */}
@@ -378,8 +363,11 @@ export default function IndieProjectsSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className={`grid gap-4 ${isMobileProject(selectedProject) ? 'grid-cols-3' : 'grid-cols-2 max-w-md mx-auto'}`}
-                  >
+                    className={`grid gap-4 ${
+                      isMobileProject(selectedProject)
+                        ? "grid-cols-3"
+                        : "grid-cols-2 max-w-md mx-auto"
+                    }`}>
                     {/* Mobile app metrics */}
                     {selectedProject.metrics.downloads && (
                       <MetricDisplay
@@ -424,13 +412,15 @@ export default function IndieProjectsSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-20"
-            >
+              className="mt-20">
               <h4 className="mb-8 text-center text-2xl font-bold text-foreground">
                 Key Features
               </h4>
               {hasFeatureImages(selectedProject) ? (
-                <FeatureShowcase features={selectedProject.features} />
+                <FeatureShowcase
+                  features={selectedProject.features}
+                  isWebProject={!isMobileProject(selectedProject)}
+                />
               ) : (
                 <FeatureList features={selectedProject.features} />
               )}
@@ -441,8 +431,7 @@ export default function IndieProjectsSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-16"
-            >
+              className="mt-16">
               <h4 className="mb-6 text-center text-xl font-semibold text-foreground">
                 Built With
               </h4>
@@ -456,5 +445,5 @@ export default function IndieProjectsSection() {
         </AnimatePresence>
       </div>
     </section>
-  )
+  );
 }

@@ -1,18 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { motion } from "framer-motion"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CodeSnippet } from "@/components/features/CodeSnippet"
-import { cn } from "@/lib/utils"
-import resumeData from "@/data/resume.json"
-import {
-  Code2,
-  Zap,
-  Rocket,
-  Scale,
-  CheckCircle2,
-} from "lucide-react"
+import * as React from "react";
+import { motion } from "framer-motion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CodeSnippet } from "@/components/features/CodeSnippet";
+import { cn } from "@/lib/utils";
+import resumeData from "@/data/resume.json";
+import { Code2, Zap, Rocket, Scale, CheckCircle2 } from "lucide-react";
 
 const tabConfig = [
   {
@@ -35,76 +29,118 @@ const tabConfig = [
     label: "Tradeoffs",
     icon: Scale,
   },
-]
+];
 
 // Example code snippets for architecture tab
-const architectureCodeExample = `// Custom hook for offline-first data sync
-export function useOfflineSync<T>(key: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [syncing, setSyncing] = useState(false);
+const performanceCodeExample = `// Custom Hook with AbortController 
+export function useLeagueStats(leagueId: string | undefined): UseLeagueStatsReturn {
+   const { fetchWithAuth } = useAuth();
+   const [league, setLeague] = React.useState<LeagueData | null>(null);
+   const [stats, setStats] = React.useState<LeagueStats | null>(null);
+   const [isLoading, setIsLoading] = React.useState(true);
+   const [error, setError] = React.useState<string | null>(null);
+   const [refreshing, setRefreshing] = React.useState(false);
 
-  useEffect(() => {
-    // Load from AsyncStorage on mount
-    AsyncStorage.getItem(key).then((stored) => {
-      if (stored) setData(JSON.parse(stored));
-    });
-  }, [key]);
+   const loadLeagueData = React.useCallback(
+      async (abortSignal?: AbortSignal) => {
+         if (!leagueId || abortSignal?.aborted) return;
 
-  const sync = async (newData: T) => {
-    setSyncing(true);
-    // Save locally first (offline-first)
-    await AsyncStorage.setItem(key, JSON.stringify(newData));
-    setData(newData);
+         try {
+            setError(null);
+            if (!refreshing && !abortSignal?.aborted) setIsLoading(true);
 
-    // Then sync to server when online
-    try {
-      await syncToFirestore(key, newData);
-    } catch (error) {
-      // Queue for later sync
-      await addToSyncQueue(key, newData);
-    } finally {
-      setSyncing(false);
-    }
-  };
+            const leagueResponse = await fetchWithAuth(
+               "{BASE_URL}/api/leagues/{leagueId}",
+               { signal: abortSignal }
+            );
 
-  return { data, sync, syncing };
-}`
+            if (abortSignal?.aborted) return;
+            if (!leagueResponse.ok) throw new Error('Failed to fetch league details');
 
-const performanceCodeExample = `// Optimized FlatList with React.memo
-const HandHistoryItem = React.memo(({ hand }: { hand: Hand }) => {
-  return (
-    <View style={styles.handCard}>
-      <Text>{hand.position}</Text>
-      <Text>{formatCurrency(hand.amount)}</Text>
-    </View>
-  );
-}, (prev, next) => prev.hand.id === next.hand.id);
+            const leagueData = await leagueResponse.json();
+            if (abortSignal?.aborted) return;
+            setLeague(leagueData.league);
 
-// Virtualized list for 10,000+ hands
-<FlatList
-  data={hands}
-  renderItem={({ item }) => <HandHistoryItem hand={item} />}
-  keyExtractor={(item) => item.id}
-  windowSize={10}
-  maxToRenderPerBatch={20}
-  updateCellsBatchingPeriod={50}
-  removeClippedSubviews={true}
-  getItemLayout={getItemLayout} // Fixed height optimization
-/>`
+            // ... fetch stats similarly
+         } catch (err) {
+            if (abortSignal?.aborted) return;
+            const errorMessage = err instanceof Error ? err.message : 'Failed to load league data';
+            setError(errorMessage);
+            captureException(err as Error, { function: 'loadLeagueData', leagueId });
+         } finally {
+            if (!abortSignal?.aborted) {
+               setIsLoading(false);
+               setRefreshing(false);
+            }
+         }
+      },
+      [leagueId, fetchWithAuth, refreshing]
+   );
+
+   React.useEffect(() => {
+      const abortController = new AbortController();
+      loadLeagueData(abortController.signal);
+      return () => abortController.abort(); // Cleanup on unmount
+   }, [loadLeagueData]);
+
+   // Memoize return object to prevent unnecessary re-renders in consumers
+   return React.useMemo(
+      () => ({ league, stats, isLoading, error, refreshing, loadLeagueData, handleRefresh }),
+      [league, stats, isLoading, error, refreshing, loadLeagueData, handleRefresh]
+   );
+}`;
+
+const architectureCodeExample = `// well-designed relational database schema with proper indexing and type inference.
+export const games = pgTable(
+   'games',
+   {
+      id: integer('id').generatedAlwaysAsIdentity().primaryKey(),
+      leagueId: integer('league_id')
+         .notNull()
+         .references(() => leagues.id, { onDelete: 'cascade' }),
+      createdBy: integer('created_by')
+         .notNull()
+         .references(() => users.id, { onDelete: 'cascade' }),
+      buyIn: decimal('buy_in', { precision: 10, scale: 2 }).notNull(),
+      status: gameStatusEnum('status').notNull().default('active'),
+      startedAt: timestamp('started_at').defaultNow().notNull(),
+      endedAt: timestamp('ended_at'),
+   },
+   (table) => ({
+      leagueIdx: index('games_league_idx').on(table.leagueId),
+      creatorIdx: index('games_creator_idx').on(table.createdBy),
+      // Composite index for stats calculations
+      leagueStatusEndedAtIdx: index('games_league_status_ended_at_idx').on(
+         table.leagueId,
+         table.status,
+         table.endedAt
+      ),
+   })
+);
+
+export const gamesRelations = relations(games, ({ one, many }) => ({
+   league: one(leagues, { fields: [games.leagueId], references: [leagues.id] }),
+   creator: one(users, { fields: [games.createdBy], references: [users.id] }),
+   players: many(gamePlayers),
+   cashIns: many(cashIns),
+}));
+
+// Type inference from schema
+export type Game = typeof games.$inferSelect;
+export type NewGame = typeof games.$inferInsert;`;
 
 export function BuildNotesSection() {
-  const [activeTab, setActiveTab] = React.useState("architecture")
-  const buildNotes = resumeData.indieProjects[0]?.buildNotes
+  const [activeTab, setActiveTab] = React.useState("architecture");
+  const buildNotes = resumeData.indieProjects[0]?.buildNotes;
 
   if (!buildNotes) {
-    return null
+    return null;
   }
 
   return (
     <section
       id="build-notes"
-      className="relative py-24 md:py-32 overflow-hidden"
-    >
+      className="relative py-24 md:py-32 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -118,8 +154,7 @@ export function BuildNotesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
-        >
+          className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Build Notes
           </h2>
@@ -134,29 +169,28 @@ export function BuildNotesSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+          transition={{ duration: 0.6, delay: 0.2 }}>
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
-            className="w-full"
-          >
+            className="w-full">
             {/* Tabs list - horizontal scroll on mobile */}
             <div className="mb-8 overflow-x-auto pb-2 -mx-4 px-4">
               <TabsList className="w-full md:w-fit min-w-full md:min-w-0 grid grid-cols-4 md:inline-flex">
                 {tabConfig.map((tab) => {
-                  const Icon = tab.icon
+                  const Icon = tab.icon;
                   return (
                     <TabsTrigger
                       key={tab.value}
                       value={tab.value}
-                      className="gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
-                    >
+                      className="gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary">
                       <Icon className="size-4" />
                       <span className="hidden sm:inline">{tab.label}</span>
-                      <span className="sm:hidden text-xs">{tab.label.slice(0, 4)}</span>
+                      <span className="sm:hidden text-xs">
+                        {tab.label.slice(0, 4)}
+                      </span>
                     </TabsTrigger>
-                  )
+                  );
                 })}
               </TabsList>
             </div>
@@ -168,16 +202,14 @@ export function BuildNotesSection() {
                   "rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm",
                   "shadow-xl p-6 md:p-8",
                   "min-h-[400px] md:min-h-[500px]"
-                )}
-              >
+                )}>
                 {/* Architecture */}
                 <TabsContent value="architecture" className="mt-0 space-y-6">
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
+                    className="space-y-6">
                     <div>
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         <Code2 className="size-5 text-primary" />
@@ -190,8 +222,7 @@ export function BuildNotesSection() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="flex items-start gap-3 text-muted-foreground"
-                          >
+                            className="flex items-start gap-3 text-muted-foreground">
                             <CheckCircle2 className="size-5 text-primary mt-0.5 shrink-0" />
                             <span className="leading-relaxed">{note}</span>
                           </motion.li>
@@ -202,7 +233,7 @@ export function BuildNotesSection() {
                     {/* Code example */}
                     <div>
                       <h4 className="text-sm font-medium text-muted-foreground mb-3">
-                        Example: Offline-First Hook Implementation
+                        Example: Custom React Hook Implementation
                       </h4>
                       <CodeSnippet
                         code={architectureCodeExample}
@@ -218,8 +249,7 @@ export function BuildNotesSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
+                    className="space-y-6">
                     <div>
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         <Zap className="size-5 text-primary" />
@@ -232,8 +262,7 @@ export function BuildNotesSection() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="flex items-start gap-3 text-muted-foreground"
-                          >
+                            className="flex items-start gap-3 text-muted-foreground">
                             <CheckCircle2 className="size-5 text-primary mt-0.5 shrink-0" />
                             <span className="leading-relaxed">{note}</span>
                           </motion.li>
@@ -260,8 +289,7 @@ export function BuildNotesSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
+                    className="space-y-6">
                     <div>
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         <Rocket className="size-5 text-primary" />
@@ -274,8 +302,7 @@ export function BuildNotesSection() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="flex items-start gap-3 text-muted-foreground"
-                          >
+                            className="flex items-start gap-3 text-muted-foreground">
                             <CheckCircle2 className="size-5 text-primary mt-0.5 shrink-0" />
                             <span className="leading-relaxed">{note}</span>
                           </motion.li>
@@ -298,7 +325,9 @@ export function BuildNotesSection() {
                             GitHub
                           </div>
                         </div>
-                        <div className="hidden md:block text-muted-foreground">→</div>
+                        <div className="hidden md:block text-muted-foreground">
+                          →
+                        </div>
                         <div className="flex flex-col items-center text-center">
                           <div className="size-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
                             <Rocket className="size-6 text-primary" />
@@ -308,7 +337,9 @@ export function BuildNotesSection() {
                             Cloud Build
                           </div>
                         </div>
-                        <div className="hidden md:block text-muted-foreground">→</div>
+                        <div className="hidden md:block text-muted-foreground">
+                          →
+                        </div>
                         <div className="flex flex-col items-center text-center">
                           <div className="size-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
                             <Zap className="size-6 text-primary" />
@@ -329,8 +360,7 @@ export function BuildNotesSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-4"
-                  >
+                    className="space-y-4">
                     <div>
                       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                         <Scale className="size-5 text-primary" />
@@ -343,8 +373,7 @@ export function BuildNotesSection() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="bg-muted/30 rounded-lg p-4 border border-border/30"
-                          >
+                            className="bg-muted/30 rounded-lg p-4 border border-border/30">
                             <div className="flex items-start gap-3">
                               <Scale className="size-5 text-primary mt-0.5 shrink-0" />
                               <p className="text-muted-foreground leading-relaxed">
@@ -362,11 +391,11 @@ export function BuildNotesSection() {
                         Tradeoff Philosophy
                       </h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">
-                        Every technical decision involves tradeoffs. These choices
-                        were made to optimize for shipping speed and user
-                        experience while maintaining code quality. As an indie
-                        developer, pragmatic decisions that enable faster iteration
-                        often outweigh theoretical perfection.
+                        Every technical decision involves tradeoffs. These
+                        choices were made to optimize for shipping speed and
+                        user experience while maintaining code quality. As an
+                        indie developer, pragmatic decisions that enable faster
+                        iteration often outweigh theoretical perfection.
                       </p>
                     </div>
                   </motion.div>
@@ -377,5 +406,5 @@ export function BuildNotesSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
