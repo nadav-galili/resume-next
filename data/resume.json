@@ -3,10 +3,10 @@
     "name": "Nadav Galili",
     "title": "Full-Stack Developer & Indie App Developer",
     "bio": "Full-stack developer with 5 years of experience building production  React Native/Expo applications and Node js backend apps at Mobile-Brain. Passionate about creating  mobile and web experiences - shipped a task management Next js PWA app for a toyota agency and Poker AI app to iOS and Android app stores. Specialized in React Native, TypeScript, and end-to-end mobile and web app development.",
-    "email": "nadav@example.com",
-    "location": "Tel Aviv, Israel",
+    "email": "nadavg100@gmail.com",
+    "location": "Hod Hasharon, Israel",
     "links": {
-      "linkedin": "https://linkedin.com/in/nadav-galili",
+      "linkedin": "https://www.linkedin.com/in/nadav-galili/",
       "github": "https://github.com/nadav-galili"
     }
   },
@@ -368,7 +368,6 @@
       "Jest",
       "React Testing Library",
       "ESLint",
-      "Prettier",
       "Sentry",
       "Mixpanel",
       "Figma"

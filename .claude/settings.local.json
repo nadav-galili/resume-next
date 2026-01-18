@@ -35,7 +35,9 @@
       "Bash(npx lighthouse:*)",
       "mcp__playwright__browser_snapshot",
       "Bash(git rm:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(for:*)",
+      "Bash(done)"
     ]
   }
 }
