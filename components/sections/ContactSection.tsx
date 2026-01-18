@@ -6,18 +6,35 @@
  * Features: social links, email, download buttons with analytics tracking
  */
 
-import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Mail, Linkedin, Github, Download, FileText } from 'lucide-react'
-import { trackLinkClick } from '@/lib/analytics'
+import { useAnalytics } from '@/hooks'
 import resumeData from '@/data/resume.json'
 
 export function ContactSection() {
   const { personal } = resumeData
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { trackSection, trackLink, trackResumeDownload } = useAnalytics()
+
+  // Track section view
+  useEffect(() => {
+    if (isInView) {
+      trackSection('contact')
+    }
+  }, [isInView, trackSection])
 
   // Handle link clicks with analytics
   const handleLinkClick = (linkName: string, url: string) => {
-    trackLinkClick(linkName, url)
+    trackLink(linkName, url)
+  }
+
+  // Handle resume download with format tracking
+  const handleResumeDownload = (format: 'pdf' | 'docx', url: string) => {
+    trackLink(`Resume ${format.toUpperCase()}`, url)
+    trackResumeDownload(format, 'contact')
   }
 
   // Social links configuration
@@ -63,6 +80,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
+      ref={ref}
       className="relative overflow-hidden bg-card py-24 md:py-32"
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -131,7 +149,7 @@ export function ContactSection() {
                   <a
                     href={link.href}
                     download
-                    onClick={() => handleLinkClick(link.name, link.href)}
+                    onClick={() => handleResumeDownload(link.name === 'Resume PDF' ? 'pdf' : 'docx', link.href)}
                   >
                     {link.icon}
                     {link.label}

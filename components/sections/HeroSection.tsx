@@ -13,11 +13,13 @@
  * - Scroll indicator
  */
 
-import { motion } from 'framer-motion'
+import { useEffect } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { trackCTAClick } from '@/lib/analytics'
+import { useAnalytics } from '@/hooks'
 import type { PersonalInfo } from '@/types/resume'
 
 interface HeroSectionProps {
@@ -90,8 +92,19 @@ const scrollIndicatorVariants = {
 }
 
 export default function HeroSection({ personal }: HeroSectionProps) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const { trackSection, trackCTA, trackResumeDownload } = useAnalytics()
+
+  // Track hero section view on mount
+  useEffect(() => {
+    if (isInView) {
+      trackSection('hero')
+    }
+  }, [isInView, trackSection])
+
   const handleScrollToWork = () => {
-    trackCTAClick('View My Work', 'hero')
+    trackCTA('View My Work', 'hero')
     const professionalSection = document.getElementById('professional')
     if (professionalSection) {
       professionalSection.scrollIntoView({ behavior: 'smooth' })
@@ -99,12 +112,14 @@ export default function HeroSection({ personal }: HeroSectionProps) {
   }
 
   const handleDownloadResume = () => {
-    trackCTAClick('Download Resume', 'hero')
+    trackCTA('Download Resume', 'hero')
+    trackResumeDownload('pdf', 'hero')
   }
 
   return (
     <section
       id="hero"
+      ref={ref}
       className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden"
     >
       {/* Background Decorative Elements */}
