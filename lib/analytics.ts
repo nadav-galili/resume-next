@@ -33,6 +33,7 @@ export const initAnalytics = async () => {
         debug: process.env.NODE_ENV === 'development',
         track_pageview: true,
         persistence: 'localStorage',
+        api_host: 'https://api-eu.mixpanel.com', // EU data residency
       })
       isInitialized = true
       console.log('Mixpanel analytics initialized')
@@ -53,6 +54,15 @@ export const trackEvent = async (
 ) => {
   if (MIXPANEL_TOKEN && isInitialized && mixpanelInstance) {
     mixpanelInstance.default.track(eventName, properties)
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Mixpanel] ${eventName}`, properties)
+    }
+  } else if (process.env.NODE_ENV === 'development') {
+    console.warn(`[Mixpanel] Event not sent: ${eventName}`, {
+      hasToken: !!MIXPANEL_TOKEN,
+      isInitialized,
+      hasInstance: !!mixpanelInstance,
+    })
   }
 }
 

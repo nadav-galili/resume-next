@@ -15,8 +15,9 @@
  * - Scroll-triggered animations
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useAnalytics } from "@/hooks";
 import {
   Brain,
   BarChart,
@@ -182,6 +183,20 @@ export default function IndieProjectsSection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { trackSection, trackProject } = useAnalytics();
+
+  // Track section view
+  useEffect(() => {
+    if (isInView) {
+      trackSection("indie-projects");
+    }
+  }, [isInView, trackSection]);
+
+  // Track project selection changes
+  const handleProjectSelect = (index: number) => {
+    setSelectedIndex(index);
+    trackProject(projects[index].name, "select_tab");
+  };
 
   if (!projects.length) {
     return null;
@@ -239,7 +254,7 @@ export default function IndieProjectsSection() {
               {projects.map((project, index) => (
                 <button
                   key={project.name}
-                  onClick={() => setSelectedIndex(index)}
+                  onClick={() => handleProjectSelect(index)}
                   className={`
                     relative rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-300
                     ${

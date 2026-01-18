@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useAnalytics } from '@/hooks'
 import {
   Card,
   CardContent,
@@ -30,6 +31,14 @@ interface ProfessionalSectionProps {
 export function ProfessionalSection({ experience }: ProfessionalSectionProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { trackSection } = useAnalytics()
+
+  // Track section view
+  useEffect(() => {
+    if (isInView) {
+      trackSection('professional')
+    }
+  }, [isInView, trackSection])
 
   // Animation variants
   const containerVariants = {

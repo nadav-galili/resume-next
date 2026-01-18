@@ -4,6 +4,88 @@ All notable changes to the Resume Web App will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-01-18 - Mixpanel Analytics Hooks & Enhanced Tracking
+
+### Added
+- **`hooks/` directory** - New hooks module for reusable React hooks
+  - `useAnalytics.ts` - Provides memoized analytics tracking functions
+    - `track()` - Generic event tracking
+    - `trackCTA()` - Button click tracking
+    - `trackLink()` - External link tracking
+    - `trackSection()` - Section view tracking (deduped)
+    - `trackProject()` - Project interaction tracking
+    - `trackScroll()` - Scroll depth milestones (25%, 50%, 75%, 100%)
+    - `trackResumeDownload()` - Resume downloads with format tracking
+    - `trackThemeChange()` - Theme toggle tracking
+    - `trackNavigation()` - Navigation click tracking
+    - `trackTimeOnPage()` - Time interval tracking
+  - `useSectionTracking.ts` - Automatic section view tracking hooks
+    - `useSectionTracking()` - Tracks when sections enter viewport via Intersection Observer
+    - `useScrollDepthTracking()` - Tracks scroll depth milestones
+    - `useTimeOnPage()` - Tracks time intervals (30s, 60s, 120s, 300s)
+  - `index.ts` - Barrel export for all hooks
+
+### Changed
+- **AnalyticsProvider** - Enhanced with automatic tracking
+  - Scroll depth tracking (25%, 50%, 75%, 100% milestones)
+  - Time on page tracking (30s, 60s, 120s, 300s intervals)
+  - Page visibility tracking (hidden/visible states)
+  - Session start/end tracking with total time
+  - Referrer tracking
+  - Device info tracking (screen size, language, user agent)
+- **HeroSection** - Refactored to use `useAnalytics` hook
+  - Section view tracking via `trackSection('hero')`
+  - CTA tracking via `trackCTA()` and `trackResumeDownload()`
+- **ProfessionalSection** - Added section view tracking
+- **IndieProjectsSection** - Added section view and project selection tracking
+  - Tracks tab selections via `trackProject(projectName, 'select_tab')`
+- **ContactSection** - Refactored to use `useAnalytics` hook
+  - Section view tracking
+  - Link click tracking via `trackLink()`
+  - Resume download tracking with format (pdf/docx)
+- **lib/analytics.ts** - Added EU data residency support
+  - Added `api_host: 'https://api-eu.mixpanel.com'` for EU Mixpanel projects
+  - Added console logging for events in development mode
+
+### Technical Details
+- **Hook architecture**: Memoized callbacks with `useCallback` to prevent unnecessary re-renders
+- **Deduplication**: Section views and scroll milestones tracked only once per session
+- **Performance**: Scroll tracking uses `requestAnimationFrame` throttling
+- **Type safety**: Full TypeScript support with exported types
+- **EU compliance**: Mixpanel configured for EU data residency endpoint
+
+### Events Tracked in Mixpanel
+| Event | Description |
+|-------|-------------|
+| Page View | Initial page load |
+| Section View | Each section scrolled into view |
+| CTA Click | Button interactions |
+| Link Click | Social/external links |
+| Resume Download | PDF/DOCX with location |
+| Project Interaction | Tab selections |
+| Scroll Depth | 25%, 50%, 75%, 100% |
+| Time on Page | 30s, 60s, 120s, 300s |
+| Page Hidden/Visible | Tab visibility changes |
+| Session End | Time spent before leaving |
+| Device Info | Screen size, language, user agent |
+| Referrer | Referring URL |
+
+### Files Added
+- `hooks/useAnalytics.ts`
+- `hooks/useSectionTracking.ts`
+- `hooks/index.ts`
+
+### Files Modified
+- `components/providers/AnalyticsProvider.tsx`
+- `components/sections/HeroSection.tsx`
+- `components/sections/ProfessionalSection.tsx`
+- `components/sections/IndieProjectsSection.tsx`
+- `components/sections/ContactSection.tsx`
+- `lib/analytics.ts`
+- `.claude/settings.local.json` (cleaned up malformed entries)
+
+---
+
 ## 2026-01-18 - Toyota SOS Images & AI Tools Branding
 
 ### Added

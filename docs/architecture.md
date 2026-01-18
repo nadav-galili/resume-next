@@ -434,6 +434,47 @@ The application is fully static with no backend API routes.
 - **shadcn**: Direct access to shadcn/ui component documentation and registry
 - **Playwright**: Browser automation for testing and interaction
 
+### Hooks Module
+
+#### hooks/useAnalytics.ts
+**Purpose**: Reusable analytics hook for components
+
+```typescript
+export function useAnalytics() {
+  return {
+    track,           // Generic event tracking
+    trackCTA,        // Button clicks
+    trackLink,       // External links
+    trackSection,    // Section views (deduped)
+    trackProject,    // Project interactions
+    trackScroll,     // Scroll depth milestones
+    trackResumeDownload, // Resume downloads
+    trackThemeChange,    // Theme toggle
+    trackNavigation,     // Nav clicks
+    trackTimeOnPage,     // Time tracking
+  }
+}
+```
+
+#### hooks/useSectionTracking.ts
+**Purpose**: Automatic section view tracking via Intersection Observer
+
+```typescript
+// Track when section enters viewport
+export function useSectionTracking(sectionName: string) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  // Tracks section view when visible
+  return ref
+}
+
+// Track scroll depth milestones (25%, 50%, 75%, 100%)
+export function useScrollDepthTracking() { ... }
+
+// Track time on page (30s, 60s, 120s, 300s)
+export function useTimeOnPage() { ... }
+```
+
 ### Library Modules
 
 #### lib/utils.ts
