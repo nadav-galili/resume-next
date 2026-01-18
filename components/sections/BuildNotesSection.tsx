@@ -232,9 +232,6 @@ export function BuildNotesSection() {
 
                     {/* Code example */}
                     <div>
-                      <h4 className="text-sm font-medium text-muted-foreground mb-3">
-                        Example: Custom React Hook Implementation
-                      </h4>
                       <CodeSnippet
                         code={architectureCodeExample}
                         language="typescript"
@@ -272,9 +269,6 @@ export function BuildNotesSection() {
 
                     {/* Code example */}
                     <div>
-                      <h4 className="text-sm font-medium text-muted-foreground mb-3">
-                        Example: Optimized FlatList Rendering
-                      </h4>
                       <CodeSnippet
                         code={performanceCodeExample}
                         language="typescript"
