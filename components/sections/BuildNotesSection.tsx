@@ -90,44 +90,108 @@ export function useLeagueStats(leagueId: string | undefined): UseLeagueStatsRetu
    );
 }`;
 
-const architectureCodeExample = `// well-designed relational database schema with proper indexing and type inference.
-export const games = pgTable(
-   'games',
-   {
-      id: integer('id').generatedAlwaysAsIdentity().primaryKey(),
-      leagueId: integer('league_id')
-         .notNull()
-         .references(() => leagues.id, { onDelete: 'cascade' }),
-      createdBy: integer('created_by')
-         .notNull()
-         .references(() => users.id, { onDelete: 'cascade' }),
-      buyIn: decimal('buy_in', { precision: 10, scale: 2 }).notNull(),
-      status: gameStatusEnum('status').notNull().default('active'),
-      startedAt: timestamp('started_at').defaultNow().notNull(),
-      endedAt: timestamp('ended_at'),
-   },
-   (table) => ({
-      leagueIdx: index('games_league_idx').on(table.leagueId),
-      creatorIdx: index('games_creator_idx').on(table.createdBy),
-      // Composite index for stats calculations
-      leagueStatusEndedAtIdx: index('games_league_status_ended_at_idx').on(
-         table.leagueId,
-         table.status,
-         table.endedAt
-      ),
-   })
-);
+const architectureCodeExample = `// utils/middleware.ts
+import * as jose from 'jose';
 
-export const gamesRelations = relations(games, ({ one, many }) => ({
-   league: one(leagues, { fields: [games.leagueId], references: [leagues.id] }),
-   creator: one(users, { fields: [games.createdBy], references: [users.id] }),
-   players: many(gamePlayers),
-   cashIns: many(cashIns),
-}));
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const jwtSecret = new TextEncoder().encode(JWT_SECRET);
+const COOKIE_NAME = 'auth_token';
 
-// Type inference from schema
-export type Game = typeof games.$inferSelect;
-export type NewGame = typeof games.$inferInsert;`;
+export interface AuthUser {
+  userId: number;
+  email: string;
+  username: string;
+  profileImage?: string;
+}
+
+/**
+ * Higher-order function that wraps API route handlers with JWT authentication.
+ * Supports both Bearer tokens (native) and cookie-based tokens (web).
+ *
+ * @param handler - The protected route handler that receives the authenticated user
+ * @returns A new handler that performs authentication before calling the original handler
+ */
+export function withAuth<T extends Response>(
+  handler: (req: Request, user: AuthUser) => Promise<T>
+) {
+  return async (req: Request): Promise<T | Response> => {
+    try {
+      // Extract token from Authorization header (native) or cookies (web)
+      let token: string | null = null;
+
+      // Check Authorization header first (mobile apps)
+      const authHeader = req.headers.get('authorization');
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.split(' ')[1];
+      }
+
+      // Fallback to cookies (web browsers)
+      if (!token) {
+        const cookieHeader = req.headers.get('cookie');
+        if (cookieHeader) {
+          const cookies = cookieHeader.split(';').reduce((acc, cookie) => {
+            const [key, value] = cookie.trim().split('=');
+            acc[key] = value;
+            return acc;
+          }, {} as Record<string, string>);
+          token = cookies[COOKIE_NAME];
+        }
+      }
+
+      if (!token) {
+        return Response.json(
+          { error: 'Authentication required' },
+          { status: 401 }
+        );
+      }
+
+      // Verify JWT and extract user information
+      const { payload } = await jose.jwtVerify(token, jwtSecret);
+      const user = payload as AuthUser;
+
+      // Call the original handler with authenticated user context
+      return await handler(req, user);
+
+    } catch (error) {
+      // Handle specific JWT errors with appropriate responses
+      if (error instanceof jose.errors.JWTExpired) {
+        return Response.json(
+          { error: 'Token expired', code: 'TOKEN_EXPIRED' },
+          { status: 401 }
+        );
+      }
+
+      if (error instanceof jose.errors.JWTInvalid) {
+        return Response.json(
+          { error: 'Invalid token', code: 'INVALID_TOKEN' },
+          { status: 401 }
+        );
+      }
+
+      console.error('Auth middleware error:', error);
+      return Response.json(
+        { error: 'Authentication failed' },
+        { status: 401 }
+      );
+    }
+  };
+}
+
+// Usage example in an API route:
+// app/api/games/create+api.ts
+export const POST = withAuth(async (request: Request, user: AuthUser) => {
+  // user.userId, user.email, etc. are available and type-safe
+  const { leagueId, buyIn } = await request.json();
+
+  // Business logic here - user is guaranteed to be authenticated
+  const game = await db.insert(games).values({
+    leagueId,
+    buyIn,
+    createdBy: user.userId, // Type-safe access to user.userId
+  }).returning();
+
+  return Response.json({ game });
+});`;
 
 export function BuildNotesSection() {
   const [activeTab, setActiveTab] = React.useState("architecture");

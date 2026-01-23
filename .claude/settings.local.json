@@ -37,5 +37,10 @@
       "mcp__playwright__browser_resize",
       "mcp__playwright__browser_snapshot"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "vercel",
+    "shadcn",
+    "playwright"
+  ]
 }

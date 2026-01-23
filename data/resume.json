@@ -2,7 +2,7 @@
   "personal": {
     "name": "Nadav Galili",
     "title": "Full-Stack Developer & Indie App Developer",
-    "bio": "Full-stack developer with 5 years of experience building production  React Native/Expo applications and Node js backend apps at Mobile-Brain. Passionate about creating  mobile and web experiences - shipped a task management Next js PWA app for a toyota agency and Poker AI app to iOS and Android app stores. Specialized in React Native, TypeScript, and end-to-end mobile and web app development.",
+    "bio": "5 years building production React Native/Expo apps and Node.js backends at Mobile-Brain. Created Poker AI to iOS and Android App Stores. Built Next.js PWA task manager for Toyota dealership. Specializing in React Native, TypeScript, and end-to-end mobile development.",
     "email": "nadavg100@gmail.com",
     "location": "Hod Hasharon, Israel",
     "links": {
@@ -103,10 +103,10 @@
       ],
       "buildNotes": {
         "architecture": [
-          "Type-Safe Schema Definition with Automatic Type Inference",
-          "Strategic Composite Indexing for Query Performance",
-          "Modular component architecture with atomic design principles",
-          "Declarative Relationships with Referential Integrity"
+          "Type-Safe Generic Middleware: Uses TypeScript generics `<T extends Response>` to create a reusable higher-order function that preserves return type safety while adding authentication logic to any API handler",
+          "Multi-Platform Token Strategy: Seamlessly handles both native mobile (Bearer token via Authorization header) and web (HTTP-only cookies) authentication in a single codebase without platform-specific code duplication",
+          "Granular Error Handling: Distinguishes between JWT expiration, invalid tokens, and verification errors using typed error classes from the `jose` library, enabling precise client-side error recovery strategies",
+          "Security Best Practices: Implements proper JWT verification with secret keys, extracts user context from validated tokens, and follows the principle of \"fail closed\" by defaulting to 401 Unauthorized on any authentication failure"
         ],
         "performance": [
           "Built with Expo managed workflow for rapid iteration and over-the-air updates",
