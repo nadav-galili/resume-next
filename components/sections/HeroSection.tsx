@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * HeroSection Component
@@ -13,17 +13,17 @@
  * - Scroll indicator
  */
 
-import { useEffect } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
-import Image from 'next/image'
-import { useRef } from 'react'
-import { Button } from '@/components/ui/button'
-import { useAnalytics } from '@/hooks'
-import type { PersonalInfo } from '@/types/resume'
+import { useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { useAnalytics } from "@/hooks";
+import type { PersonalInfo } from "@/types/resume";
 
 interface HeroSectionProps {
-  personal: PersonalInfo
+  personal: PersonalInfo;
 }
 
 // Animation variants for stagger effect
@@ -34,9 +34,9 @@ const containerVariants = {
     transition: {
       staggerChildren: 0.15,
       delayChildren: 0.2,
-    }
-  }
-}
+    },
+  },
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -44,12 +44,12 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring' as const,
+      type: "spring" as const,
       stiffness: 100,
       damping: 15,
-    }
-  }
-}
+    },
+  },
+};
 
 // Image card animation with floating effect
 const imageCardVariants = {
@@ -59,13 +59,13 @@ const imageCardVariants = {
     scale: 1,
     y: 0,
     transition: {
-      type: 'spring' as const,
+      type: "spring" as const,
       stiffness: 80,
       damping: 20,
       delay: 0.4,
-    }
-  }
-}
+    },
+  },
+};
 
 // Floating animation for images
 const floatingVariants = {
@@ -74,10 +74,10 @@ const floatingVariants = {
     transition: {
       duration: 6,
       repeat: Infinity,
-      ease: 'easeInOut' as const,
-    }
-  }
-}
+      ease: "easeInOut" as const,
+    },
+  },
+};
 
 // Scroll indicator animation
 const scrollIndicatorVariants = {
@@ -86,55 +86,54 @@ const scrollIndicatorVariants = {
     transition: {
       duration: 1.5,
       repeat: Infinity,
-      ease: 'easeInOut' as const,
-    }
-  }
-}
+      ease: "easeInOut" as const,
+    },
+  },
+};
 
 export default function HeroSection({ personal }: HeroSectionProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const { trackSection, trackCTA, trackResumeDownload } = useAnalytics()
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const { trackSection, trackCTA, trackResumeDownload } = useAnalytics();
 
   // Track hero section view on mount
   useEffect(() => {
     if (isInView) {
-      trackSection('hero')
+      trackSection("hero");
     }
-  }, [isInView, trackSection])
+  }, [isInView, trackSection]);
 
   const handleScrollToWork = () => {
-    trackCTA('View My Work', 'hero')
-    const professionalSection = document.getElementById('professional')
+    trackCTA("View My Work", "hero");
+    const professionalSection = document.getElementById("professional");
     if (professionalSection) {
-      professionalSection.scrollIntoView({ behavior: 'smooth' })
+      professionalSection.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   const handleDownloadResume = () => {
-    trackCTA('Download Resume', 'hero')
-    trackResumeDownload('pdf', 'hero')
-  }
+    trackCTA("Download Resume", "hero");
+    trackResumeDownload("pdf", "hero");
+  };
 
   return (
     <section
       id="hero"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden"
-    >
+      className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Gradient Orbs for depth */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 0.3, scale: 1 }}
-          transition={{ duration: 2, ease: 'easeOut' }}
+          transition={{ duration: 2, ease: "easeOut" }}
           className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-foreground/10 rounded-full blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 0.2, scale: 1 }}
-          transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
           className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-foreground/10 rounded-full blur-3xl"
         />
       </div>
@@ -147,43 +146,57 @@ export default function HeroSection({ personal }: HeroSectionProps) {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="relative z-10 text-center lg:text-left lg:pr-8"
-          >
+            className="relative z-10 text-center lg:text-left lg:pr-8">
             {/* Name */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 tracking-tight"
-            >
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 tracking-tight">
               {personal.name}
             </motion.h1>
 
             {/* Title */}
             <motion.h2
               variants={itemVariants}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground/90 mb-6"
-            >
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground/90 mb-6">
               {personal.title}
             </motion.h2>
 
-            {/* Bio */}
-            <motion.p
+            {/* Bio Video - Terminal typing animation */}
+            <motion.div
               variants={itemVariants}
-              className="text-sm sm:text-base md:text-lg text-foreground/80 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
-            >
-              {personal.bio}
-            </motion.p>
+              className="mb-10 max-w-4xl mx-auto lg:mx-0 rounded-xl overflow-hidden shadow-2xl border border-foreground/10">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto"
+                aria-label="Terminal animation showing professional bio"
+                onEnded={(e) => {
+                  // Restart with 1 second delay between loops
+                  const video = e.currentTarget;
+                  setTimeout(() => {
+                    video.currentTime = 0;
+                    video.play();
+                  }, 1000);
+                }}>
+                <source src="/videos/portfolio-4k.mp4" type="video/mp4" />
+                {/* Fallback text for browsers that don't support video */}
+                <p className="text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed">
+                  {personal.bio}
+                </p>
+              </video>
+            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4"
-            >
+              className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
               <Button
                 onClick={handleScrollToWork}
                 size="lg"
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 py-6 text-base min-w-[200px] h-12 shadow-2xl hover:shadow-xl transition-all hover:scale-105"
-                aria-label="View my work and projects"
-              >
+                aria-label="View my work and projects">
                 View My Work
               </Button>
 
@@ -192,14 +205,12 @@ export default function HeroSection({ personal }: HeroSectionProps) {
                 variant="outline"
                 size="lg"
                 onClick={handleDownloadResume}
-                className="bg-foreground/10 text-foreground border-foreground/30 hover:bg-foreground/20 hover:text-foreground backdrop-blur-sm font-semibold px-8 py-6 text-base min-w-[200px] h-12 hover:scale-105 transition-all"
-              >
+                className="bg-foreground/10 text-foreground border-foreground/30 hover:bg-foreground/20 hover:text-foreground backdrop-blur-sm font-semibold px-8 py-6 text-base min-w-[200px] h-12 hover:scale-105 transition-all">
                 <a
                   href="/resume/nadav-galili-resume.pdf"
                   download="nadav-galili-resume.pdf"
                   target="_blank"
-                  rel="noopener noreferrer"
-                >
+                  rel="noopener noreferrer">
                   Download Resume
                 </a>
               </Button>
@@ -213,13 +224,11 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               variants={imageCardVariants}
               initial="hidden"
               animate="show"
-              className="relative w-full max-w-[400px] lg:max-w-[450px]"
-            >
+              className="relative w-full max-w-[400px] lg:max-w-[450px]">
               <motion.div
                 variants={floatingVariants}
                 animate="animate"
-                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10"
-              >
+                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10">
                 <div className="aspect-square relative">
                   <Image
                     src="/images/hero/hero.webp"
@@ -238,14 +247,12 @@ export default function HeroSection({ personal }: HeroSectionProps) {
               variants={imageCardVariants}
               initial="hidden"
               animate="show"
-              className="relative w-full max-w-[350px] lg:max-w-[400px] lg:-mt-12"
-            >
+              className="relative w-full max-w-[350px] lg:max-w-[400px] lg:-mt-12">
               <motion.div
                 variants={floatingVariants}
                 animate="animate"
-                style={{ animationDelay: '1s' }}
-                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10"
-              >
+                style={{ animationDelay: "1s" }}
+                className="relative glass rounded-3xl overflow-hidden shadow-2xl border border-foreground/10">
                 <div className="aspect-[4/3] relative">
                   <Image
                     src="/images/hero/developing.webp"
@@ -269,11 +276,15 @@ export default function HeroSection({ personal }: HeroSectionProps) {
         variants={scrollIndicatorVariants}
         animate="animate"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 bg-transparent border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg p-2"
-        onClick={handleScrollToWork}
-      >
-        <span className="text-foreground/70 text-sm font-medium">Scroll to explore</span>
-        <ChevronDown className="w-6 h-6 text-foreground/70" aria-hidden="true" />
+        onClick={handleScrollToWork}>
+        <span className="text-foreground/70 text-sm font-medium">
+          Scroll to explore
+        </span>
+        <ChevronDown
+          className="w-6 h-6 text-foreground/70"
+          aria-hidden="true"
+        />
       </motion.button>
     </section>
-  )
+  );
 }
