@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nadav-galili-resume.vercel.app',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nadav-galili.site',
   generateRobotsTxt: false, // We have a custom robots.txt
   generateIndexSitemap: false, // Single page site doesn't need index
   changefreq: 'monthly',
