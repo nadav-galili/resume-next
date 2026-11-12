@@ -6,6 +6,7 @@ import AILLMToolsSection from '@/components/sections/AILLMToolsSection'
 import { TechStackSection } from '@/components/sections/TechStackSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import resumeData from '@/data/resume.json'
+import type { IndieProject } from '@/types/resume'
 
 /**
  * Home Page
@@ -13,10 +14,18 @@ import resumeData from '@/data/resume.json'
  * Mobile-first, App Store aesthetic design
  */
 export default function Home() {
+  // Hero shows the flagship app's first store screenshots
+  const projects = resumeData.indieProjects as IndieProject[]
+  const flagship = projects.find((project) => project.featured) ?? projects[0]
+  const heroShots = (flagship?.screenshots ?? []).slice(0, 3).map((shot) => ({
+    src: shot.src,
+    alt: `${flagship.name} – ${shot.title}`,
+  }))
+
   return (
     <>
       {/* Hero Section - Full viewport with gradient */}
-      <HeroSection personal={resumeData.personal} />
+      <HeroSection personal={resumeData.personal} screenshots={heroShots} />
 
       {/* Professional Experience - Mobile-Brain */}
       <ProfessionalSection experience={resumeData.professional[0]} />

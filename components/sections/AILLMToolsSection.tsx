@@ -39,10 +39,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 // Logo paths for AI tools
 const toolLogos: Record<string, { light: string; dark: string } | string> = {
   'Claude Code': '/images/tech-logos/claude-color.svg',
-  'Cursor IDE': {
-    light: '/images/tech-logos/CUBE_2D_LIGHT.svg',
-    dark: '/images/tech-logos/CUBE_2D_DARK.svg',
-  },
 }
 
 // Animation variants
@@ -260,7 +256,7 @@ export default function AILLMToolsSection() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
             <Sparkles className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">
-              AI-Augmented Development
+              How I build in 2026
             </span>
           </div>
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
@@ -312,7 +308,7 @@ export default function AILLMToolsSection() {
           className="mx-auto max-w-2xl"
         >
           <h3 className="mb-8 text-center text-xl font-semibold text-foreground">
-            Results & Impact
+            By the numbers
           </h3>
           <div className="grid grid-cols-3 gap-4">
             {aiTools.results.map((result) => (

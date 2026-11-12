@@ -128,13 +128,49 @@
 
 /* App Store Custom Classes */
 @layer utilities {
-  /* Hero gradient - theme-aware */
-  .hero-gradient {
-    background: linear-gradient(135deg, oklch(90% 0.1 250) 0%, oklch(85% 0.08 280) 100%);
+  /* Hero backdrop - aurora glow, theme-aware */
+  .hero-aurora {
+    background:
+      radial-gradient(60% 50% at 20% 0%, oklch(60% 0.22 250 / 0.18) 0%, transparent 70%),
+      radial-gradient(50% 45% at 85% 10%, oklch(55% 0.22 290 / 0.14) 0%, transparent 70%);
   }
 
-  .dark .hero-gradient {
-    background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+  .dark .hero-aurora {
+    background:
+      radial-gradient(60% 50% at 20% 0%, oklch(60% 0.22 250 / 0.38) 0%, transparent 70%),
+      radial-gradient(50% 45% at 85% 10%, oklch(50% 0.24 290 / 0.32) 0%, transparent 70%);
+  }
+
+  /* Faint grid that fades out toward the bottom */
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, oklch(50% 0 0 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(50% 0 0 / 0.08) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  }
+
+  /* Blue-to-purple text accent */
+  .text-gradient {
+    background: linear-gradient(90deg, oklch(60% 0.22 250), oklch(55% 0.22 290));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dark .text-gradient {
+    background: linear-gradient(90deg, oklch(72% 0.17 245), oklch(72% 0.17 300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hide scrollbars on horizontal galleries */
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   /* Glass morphism effect - theme-aware */

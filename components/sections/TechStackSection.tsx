@@ -7,7 +7,7 @@
  */
 
 import { motion } from 'framer-motion'
-import { TechLogo } from '@/components/features/TechLogo'
+import { Smartphone, Layers, Server, Wrench, Sparkles } from 'lucide-react'
 import resumeData from '@/data/resume.json'
 
 // Animation variants
@@ -35,12 +35,13 @@ const categoryVariants = {
 export function TechStackSection() {
   const { skills } = resumeData
 
-  // Define categories with their display names and keys
+  // Categories in display order; `span` makes the lead card wider on desktop
   const categories = [
-    { key: 'mobile' as const, title: 'Mobile Development', color: 'text-blue-400' },
-    { key: 'fullStack' as const, title: 'Full-Stack Development', color: 'text-purple-400' },
-    { key: 'backend' as const, title: 'Backend & Infrastructure', color: 'text-green-400' },
-    { key: 'tools' as const, title: 'Tools & DevOps', color: 'text-orange-400' },
+    { key: 'mobile' as const, title: 'Mobile', icon: Smartphone, span: 'lg:col-span-3' },
+    { key: 'ai' as const, title: 'AI Engineering', icon: Sparkles, span: 'lg:col-span-3' },
+    { key: 'fullStack' as const, title: 'Web & Full-Stack', icon: Layers, span: 'lg:col-span-2' },
+    { key: 'backend' as const, title: 'Backend & Data', icon: Server, span: 'lg:col-span-2' },
+    { key: 'tools' as const, title: 'Tooling & Ops', icon: Wrench, span: 'lg:col-span-2' },
   ]
 
   return (
@@ -55,9 +56,9 @@ export function TechStackSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+          <h2 className="mb-4 text-3xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl">
             Tech Stack
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
@@ -65,15 +66,15 @@ export function TechStackSection() {
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skills bento */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="space-y-16"
+          className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-6"
         >
-          {categories.map(({ key, title, color }) => {
+          {categories.map(({ key, title, icon: Icon, span }) => {
             const categorySkills = skills[key]
 
             if (!categorySkills || categorySkills.length === 0) return null
@@ -82,26 +83,26 @@ export function TechStackSection() {
               <motion.div
                 key={key}
                 variants={categoryVariants}
-                className="space-y-6"
+                className={`relative z-10 rounded-3xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm transition-colors hover:border-primary/40 ${span}`}
               >
-                {/* Category Title */}
-                <div className="flex items-center gap-3">
-                  <div className={`h-1 w-12 rounded-full bg-gradient-to-r from-primary to-accent`} />
-                  <h3 className={`text-2xl font-semibold ${color}`}>
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">
                     {title}
                   </h3>
                 </div>
-
-                {/* Skills Grid */}
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <ul className="flex flex-wrap gap-2">
                   {categorySkills.map((skill) => (
-                    <TechLogo
+                    <li
                       key={`${key}-${skill}`}
-                      name={skill}
-                      category={key}
-                    />
+                      className="rounded-full border border-border/60 bg-background/60 px-3 py-1.5 text-sm text-foreground/90"
+                    >
+                      {skill}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.div>
             )
           })}

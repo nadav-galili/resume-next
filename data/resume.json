@@ -1,10 +1,24 @@
 {
   "personal": {
     "name": "Nadav Galili",
-    "title": "Full-Stack Developer & Indie App Developer",
-    "bio": "5 years building production React Native/Expo apps and Node.js backends at Mobile-Brain. Created Poker AI to iOS and Android App Stores. Built Next.js PWA task manager for Toyota dealership. Specializing in React Native, TypeScript, and end-to-end mobile development.",
+    "title": "React Native & Full-Stack Developer",
+    "bio": "I build and ship mobile products end to end. 6+ years of production React Native / Expo and Node.js at Mobile-Brain, plus two indie apps live on the App Store — designed, built and released solo with an AI-native workflow.",
     "email": "nadavg1000@gmail.com",
     "location": "Hod Hasharon, Israel",
+    "highlights": [
+      {
+        "value": "6+ yrs",
+        "label": "Production React Native & Node.js"
+      },
+      {
+        "value": "2",
+        "label": "Indie apps live on the App Store"
+      },
+      {
+        "value": "5.0 ★",
+        "label": "App Store rating, Poker AI: HomeStack"
+      }
+    ],
     "links": {
       "linkedin": "https://www.linkedin.com/in/nadav-galili/",
       "github": "https://github.com/nadav-galili"
@@ -14,18 +28,18 @@
     {
       "company": "Mobile-Brain",
       "role": "Full-Stack Developer",
-      "duration": "5 years",
+      "duration": "2020 — Present",
       "startDate": "2020-01-01",
-      "description": "Leading development of native mobile applications using React Native/Expo, and TypeScript. Built scalable backend systems and APIs for affiliate marketing using Node js and Mysql serving hundreds of thousands of users with focus on performance and reliability.",
+      "description": "Building and maintaining React Native / Expo mobile apps and the TypeScript backends behind them. Built scalable Node.js and MySQL APIs for affiliate marketing serving hundreds of thousands of users, with a focus on performance and reliability.",
       "achievements": [
         {
-          "title": "Architected React Native /Expo deployment pipeline",
-          "description": "Built and maintained a comprehensive React Native /Expo deployment pipeline using EAS Build and Expo Updates,with automated deployment and testing.",
+          "title": "Architected React Native / Expo deployment pipeline",
+          "description": "Built and maintain a React Native / Expo release pipeline on EAS Build and EAS Update, with automated builds, testing and over-the-air updates.",
           "metrics": "40% faster development"
         },
         {
           "title": "Led TypeScript Migration",
-          "description": "Spearheaded migration of legacy PHP codebase to TypeScript Node js Express , establishing type-safe patterns and reducing runtime errors by 60%",
+          "description": "Spearheaded migration of a legacy PHP codebase to TypeScript on Node.js and Express, establishing type-safe patterns and reducing runtime errors by 60%",
           "metrics": "60% reduction in runtime errors"
         },
         {
@@ -42,15 +56,17 @@
         }
       ],
       "techStack": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "AWS",
-        "Next js",
         "React Native",
         "Expo",
-        "MongoDB"
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "Next.js",
+        "React",
+        "MySQL",
+        "PostgreSQL",
+        "MongoDB",
+        "AWS"
       ],
       "location": "Ramat Gan, Israel"
     }
@@ -58,47 +74,104 @@
   "indieProjects": [
     {
       "name": "Poker AI: HomeStack",
-      "tagline": "Your personal AI poker coach for home games",
-      "description": "A mobile-first poker tracking  app that helps casual players improve their game. Built with React Native and Expo, featuring real-time game tracking, AI-powered insights, and beautiful visualizations. Shipped to both iOS App Store and Google Play Store.",
-      "platforms": ["iOS", "Android"],
+      "tagline": "Your poker night, finally organized",
+      "description": "A league manager and live-game tracker for home poker nights. Friends join a league by invite code, the app runs the bank during the game, and an AI summary plus stats, awards and head-to-head records settle every argument afterwards. Solo-built with Expo and shipped to the App Store and Google Play, in English, Hebrew (RTL) and Spanish.",
+      "platforms": [
+        "iOS",
+        "Android"
+      ],
       "features": [
         {
+          "icon": "calculator",
+          "title": "The bank does the math",
+          "description": "Track buy-ins, re-buys and cash-outs live during the game, with one active game per league and settlements calculated automatically."
+        },
+        {
           "icon": "brain",
-          "title": "AI-Powered Insights",
-          "description": "Get personalized recommendations based on your playing style and hand history using advanced analytics",
-          "image": "/images/poker-ai/feature-1.webp"
-        },
-        {
-          "icon": "chart-bar",
-          "title": "Hand Tracking",
-          "description": "Quickly log hands during your games with an intuitive mobile interface optimized for speed",
-          "image": "/images/poker-ai/feature-2.webp"
-        },
-        {
-          "icon": "graduation-cap",
-          "title": "Personal Coach",
-          "description": "Learn from detailed post-game analysis highlighting mistakes and missed opportunities",
-          "image": "/images/poker-ai/feature-3.webp"
+          "title": "AI league summary",
+          "description": "An LLM turns league history into a plain-language recap, returned as schema-validated structured output."
         },
         {
           "icon": "trending-up",
-          "title": "Statistics & Trends",
-          "description": "Track your progress over time with beautiful charts showing win rates, position analysis, and more",
-          "image": "/images/poker-ai/feature-4.webp"
+          "title": "League & personal stats",
+          "description": "ROI, win streaks, monthly profit leaders and season-by-season rankings for every player."
+        },
+        {
+          "icon": "swords",
+          "title": "Head to head",
+          "description": "Pick any two players and compare their record across the games they played together."
+        },
+        {
+          "icon": "trophy",
+          "title": "Awards & badges",
+          "description": "MVP, Shark, Hot Streak and Comeback King are handed out automatically every month."
+        },
+        {
+          "icon": "languages",
+          "title": "Invite links & RTL",
+          "description": "Join a league from a universal link or code. Fully localized in English, Hebrew (right-to-left) and Spanish."
         }
       ],
       "techStack": [
+        {
+          "name": "Expo SDK 54",
+          "category": "mobile"
+        },
         {
           "name": "React Native",
           "category": "mobile"
         },
         {
-          "name": "Expo",
+          "name": "TypeScript",
           "category": "mobile"
         },
         {
-          "name": "TypeScript",
+          "name": "Expo Router + API routes",
           "category": "mobile"
+        },
+        {
+          "name": "NativeWind",
+          "category": "mobile"
+        },
+        {
+          "name": "TanStack Query",
+          "category": "mobile"
+        },
+        {
+          "name": "Reanimated",
+          "category": "mobile"
+        },
+        {
+          "name": "Neon Postgres",
+          "category": "backend"
+        },
+        {
+          "name": "Drizzle ORM",
+          "category": "backend"
+        },
+        {
+          "name": "Cloudflare R2",
+          "category": "backend"
+        },
+        {
+          "name": "OpenAI API",
+          "category": "ai"
+        },
+        {
+          "name": "Sentry",
+          "category": "devops"
+        },
+        {
+          "name": "Mixpanel",
+          "category": "devops"
+        },
+        {
+          "name": "Jest + RNTL",
+          "category": "devops"
+        },
+        {
+          "name": "GitHub Actions",
+          "category": "devops"
         }
       ],
       "buildNotes": {
@@ -109,22 +182,22 @@
           "Security Best Practices: Implements proper JWT verification with secret keys, extracts user context from validated tokens, and follows the principle of \"fail closed\" by defaulting to 401 Unauthorized on any authentication failure"
         ],
         "performance": [
-          "Built with Expo managed workflow for rapid iteration and over-the-air updates",
-          "Implemented offline-first architecture using AsyncStorage and sync queues",
-          "Modular component architecture with atomic design principles",
-          "Custom hook system for business logic separation and reusability"
+          "Server state lives in TanStack Query, with FlashList for long player and game lists",
+          "React Compiler and Reanimated keep interactions on the UI thread at 60fps",
+          "Custom hooks with AbortController cancel in-flight requests on unmount",
+          "Player and game photos are stored on Cloudflare R2 instead of the database"
         ],
         "deployment": [
-          "Set up EAS Build for cloud-based iOS and Android builds",
-          "Configured over-the-air updates with Expo Updates for instant bug fixes",
-          "Implemented staged rollouts to test updates with small user groups first",
-          "Automated App Store and Play Store submission process"
+          "EAS Build for cloud iOS and Android builds, EAS Update for over-the-air fixes",
+          "API routes deployed with EAS Hosting next to the app, backed by Neon serverless Postgres",
+          "GitHub Actions runs lint and 1,390+ Jest tests with coverage on every push",
+          "Husky pre-push hook runs the full suite before anything reaches the remote"
         ],
         "tradeoffs": [
           "Chose Expo managed workflow for faster development over bare React Native for maximum control",
-          "Used Expo Api routes instead of custom backend to focus on mobile experience and ship faster",
-          "Implemented client-side analytics calculations to reduce backend costs (trade: slower initial load)",
-          "Limited offline functionality to core features to reduce complexity"
+          "Used Expo API routes instead of a separate backend to keep one codebase and ship faster",
+          "Called the LLM over a plain HTTP client with zod validation instead of adopting a full AI framework",
+          "Kept typed JWT auth in-house (jose) rather than adding a hosted auth provider"
         ],
         "challenges": [
           "Handling edge cases in game history parsing and validation",
@@ -146,17 +219,222 @@
       },
       "metrics": {
         "downloads": "150+",
-        "rating": 4.5,
+        "rating": 5,
         "users": "100+",
         "activeUsers": "100+ monthly"
       },
-      "featured": true
+      "featured": true,
+      "icon": "/images/poker-ai/icon.webp",
+      "screenshots": [
+        {
+          "src": "/images/poker-ai/01-league-home.webp",
+          "title": "League home"
+        },
+        {
+          "src": "/images/poker-ai/02-live-game.webp",
+          "title": "Live game bank"
+        },
+        {
+          "src": "/images/poker-ai/03-head-to-head.webp",
+          "title": "Head to head"
+        },
+        {
+          "src": "/images/poker-ai/04-awards.webp",
+          "title": "Monthly awards"
+        },
+        {
+          "src": "/images/poker-ai/05-league-stats.webp",
+          "title": "League stats"
+        }
+      ],
+      "store": [
+        {
+          "label": "Rating",
+          "value": "5.0",
+          "stars": true
+        },
+        {
+          "label": "Platforms",
+          "value": "2",
+          "sub": "iOS · Android"
+        },
+        {
+          "label": "Version",
+          "value": "1.7",
+          "sub": "Updated Sep 2026"
+        },
+        {
+          "label": "Category",
+          "value": "Sports",
+          "sub": "App Store"
+        },
+        {
+          "label": "Languages",
+          "value": "3",
+          "sub": "EN · HE · ES"
+        }
+      ]
+    },
+    {
+      "name": "Mibo: Chores Tracker",
+      "tagline": "Chores get done. No nagging.",
+      "description": "A kids chores and allowance app where the child is the primary user. Parents set chores and rewards; each child ticks off their own list on their own device — offline if needed — earns coins instantly and raises a pet that cheers them on. Released on the App Store for iPhone and iPad in November 2026.",
+      "platforms": [
+        "iOS"
+      ],
+      "icon": "/images/mibo/icon.webp",
+      "screenshots": [
+        {
+          "src": "/images/mibo/01-home.webp",
+          "title": "Child's day"
+        },
+        {
+          "src": "/images/mibo/02-approve.webp",
+          "title": "Photo approval"
+        },
+        {
+          "src": "/images/mibo/03-pet.webp",
+          "title": "Pet companion"
+        },
+        {
+          "src": "/images/mibo/04-rewards.webp",
+          "title": "Reward shop"
+        },
+        {
+          "src": "/images/mibo/05-allowance.webp",
+          "title": "Allowance"
+        }
+      ],
+      "store": [
+        {
+          "label": "Released",
+          "value": "2026",
+          "sub": "November"
+        },
+        {
+          "label": "Devices",
+          "value": "2",
+          "sub": "iPhone · iPad"
+        },
+        {
+          "label": "Version",
+          "value": "1.0",
+          "sub": "App Store"
+        },
+        {
+          "label": "Category",
+          "value": "Productivity",
+          "sub": "App Store"
+        }
+      ],
+      "features": [
+        {
+          "icon": "zap",
+          "title": "Instant rewards",
+          "description": "Children earn coins the moment a chore is done, on their own phone or tablet — even offline."
+        },
+        {
+          "icon": "layout",
+          "title": "Photo approval",
+          "description": "Parents see the photo and tap approve, or reject it so the chore comes back as a redo."
+        },
+        {
+          "icon": "sparkles",
+          "title": "A pet that cheers them on",
+          "description": "Built-in motivation: a companion that grows as chores get done."
+        },
+        {
+          "icon": "trophy",
+          "title": "Rewards & real allowance",
+          "description": "Parents choose what coins buy and convert them into real allowance at their own rate."
+        }
+      ],
+      "techStack": [
+        {
+          "name": "Expo SDK 57",
+          "category": "mobile"
+        },
+        {
+          "name": "React Native 0.86",
+          "category": "mobile"
+        },
+        {
+          "name": "TypeScript",
+          "category": "mobile"
+        },
+        {
+          "name": "Expo Router",
+          "category": "mobile"
+        },
+        {
+          "name": "Hono API",
+          "category": "backend"
+        },
+        {
+          "name": "Drizzle ORM",
+          "category": "backend"
+        },
+        {
+          "name": "PostgreSQL",
+          "category": "backend"
+        },
+        {
+          "name": "Clerk",
+          "category": "backend"
+        },
+        {
+          "name": "RevenueCat",
+          "category": "mobile"
+        },
+        {
+          "name": "PostHog",
+          "category": "devops"
+        },
+        {
+          "name": "Sentry",
+          "category": "devops"
+        },
+        {
+          "name": "Vitest",
+          "category": "devops"
+        },
+        {
+          "name": "Turborepo",
+          "category": "devops"
+        },
+        {
+          "name": "Railway",
+          "category": "devops"
+        }
+      ],
+      "buildNotes": {
+        "architecture": [
+          "pnpm + Turborepo monorepo: Expo app, Hono API and a shared package for types and validation",
+          "Children never have an email or password — only parents authenticate, through Clerk",
+          "Household is the unit of the product: timezone, currency, entitlement, parents and children"
+        ],
+        "performance": [
+          "Chores complete on the child's device first and sync later, so it works offline"
+        ],
+        "deployment": [
+          "API on Railway, mobile builds through EAS, subscriptions through RevenueCat"
+        ],
+        "tradeoffs": [
+          "One evening summary for parents instead of a notification per chore"
+        ]
+      },
+      "links": {
+        "appStore": "https://apps.apple.com/us/app/mibo-chores-tracker/id6812645404"
+      },
+      "featured": false
     },
     {
       "name": "Drivers Task Manager",
       "tagline": "Real-time task coordination for Toyota dealership operations",
-      "description": "Full-stack Progressive Web App that replaced manual Excel workflows with a real-time kanban system. Built for Toyota agency staff - drivers, desk personnel, and managers - to coordinate vehicle logistics with instant status updates and push notifications.",
-      "platforms": ["Web"],
+      "description": "Full-stack Progressive Web App that replaced manual Excel workflows with a real-time task system for a Toyota dealership. Drivers, desk staff and managers coordinate vehicle logistics with instant status updates, push notifications, and signature and photo capture — in a Hebrew right-to-left interface that keeps working offline.",
+      "platforms": [
+        "Web"
+      ],
       "features": [
         {
           "icon": "refresh-cw",
@@ -165,44 +443,56 @@
           "image": "/images/toyota-sos/feature-3.webp"
         },
         {
-          "icon": "bell",
-          "title": "Kpi Charts",
-          "description": "KPIs and analytics for managers to track performance and identify bottlenecks",
+          "icon": "bar-chart-2",
+          "title": "KPI Charts",
+          "description": "Per-driver completion and duration charts, status breakdowns and weekly trends for managers",
           "image": "/images/toyota-sos/feature-2.webp"
         },
         {
-          "icon": "bar-chart-2",
+          "icon": "layout",
           "title": "Admin Dashboard",
-          "description": "KPIs and analytics for managers to track performance and identify bottlenecks",
+          "description": "Tasks, drivers, vehicles, an audit log and role-based access for admins, managers, drivers and viewers",
           "image": "/images/toyota-sos/feature-1.webp"
         },
         {
-          "icon": "layout",
-          "title": "Kanban Workflow with calendar view",
-          "description": "Visual task board with drag-and-drop for intuitive task management",
+          "icon": "bell",
+          "title": "Kanban & Calendar",
+          "description": "Visual task board with drag-and-drop plus a calendar view, with late-task checks and push notifications",
           "image": "/images/toyota-sos/feature-4.webp"
         }
       ],
       "techStack": [
         {
-          "name": "Next.js",
+          "name": "Next.js 16",
           "category": "frontend"
         },
         {
-          "name": "Supabase",
-          "category": "backend"
+          "name": "React 19",
+          "category": "frontend"
         },
         {
           "name": "TypeScript",
           "category": "frontend"
         },
         {
+          "name": "Supabase (Postgres, RLS, Realtime)",
+          "category": "backend"
+        },
+        {
           "name": "Tailwind CSS",
           "category": "frontend"
         },
         {
-          "name": "PWA",
+          "name": "PWA + Service Worker",
           "category": "frontend"
+        },
+        {
+          "name": "IndexedDB offline queue",
+          "category": "frontend"
+        },
+        {
+          "name": "Web Push",
+          "category": "backend"
         },
         {
           "name": "Vercel",
@@ -214,7 +504,7 @@
           "Designed as a Progressive Web App for cross-platform compatibility without app store deployment",
           "Real-time data synchronization using Supabase Realtime subscriptions",
           "Role-based access control for drivers, desk staff, and managers",
-          "Offline-capable with service workers for field use"
+          "Offline-first for field use: IndexedDB queues and a service worker with background sync"
         ],
         "performance": [
           "Optimistic UI updates for instant feedback on task status changes",
@@ -242,10 +532,7 @@
           "Close collaboration with end users is essential for workflow tools"
         ]
       },
-      "links": {
-        "website": "",
-        "github": ""
-      },
+      "links": {},
       "metrics": {
         "impact": "Eliminated manual Excel tracking",
         "users": "Active daily use by dealership staff"
@@ -254,77 +541,75 @@
     }
   ],
   "aiTools": {
-    "title": "AI-Powered Development",
-    "description": "Leveraging cutting-edge AI tools to deliver high-quality features faster while maintaining architectural integrity",
+    "title": "AI-Native Engineering",
+    "description": "I run a spec-driven, multi-agent workflow and ship LLM features in production — with tests and review as the guardrails, not vibes.",
     "tools": [
       {
         "name": "Claude Code",
-        "category": "AI Planning & Architecture",
+        "category": "Agentic development",
         "icon": "brain",
-        "description": "Advanced AI agent for planning complex features, generating implementation plans, and architecting solutions with deep codebase understanding.",
+        "description": "My daily driver. Features go from spec to tickets to parallel implementers working in isolated git worktrees, then through review agents before they merge.",
         "capabilities": [
-          "Using Ralph Wiggum for tasks breakdown, planning and execution",
-          "Feature planning and task breakdown",
-          "Multi-agent orchestration for complex workflows",
-          "Code generation with architectural awareness",
-          "Automated code reviews and optimization",
-          "Technical documentation generation"
+          "Spec → tickets → parallel implementation in git worktrees",
+          "Custom skills, slash commands and hooks for repeatable workflows",
+          "Subagents for code review, e2e test review and changelogs",
+          "MCP servers for docs, simulators, error tracking and analytics",
+          "Project context kept in CLAUDE.md, ADRs and domain glossaries"
         ],
-        "impact": "80% reduction in planning time"
+        "impact": "Daily driver across my projects"
       },
       {
-        "name": "Cursor IDE",
-        "category": "AI-Native Development",
+        "name": "LLMs in production",
+        "category": "AI product features",
         "icon": "code",
-        "description": "AI-native code editor for intelligent code completion, refactoring, and rapid prototyping with full codebase context.",
+        "description": "Shipping model-backed features to real users, with typed contracts around every call so the app never depends on free-form text.",
         "capabilities": [
-          "Context-aware code completion",
-          "Multi-file intelligent editing",
-          "AI-assisted refactoring",
-          "Natural language to code generation",
-          "Rapid bug fixing and debugging"
+          "AI league summaries in Poker AI: HomeStack (OpenAI API)",
+          "Schema-validated structured output with zod",
+          "Vision-model capture prototypes with the Anthropic SDK and Vercel AI SDK",
+          "Agent prototypes that queue risky actions for human approval"
         ],
-        "impact": "3x faster code delivery"
+        "impact": "Live in Poker AI: HomeStack"
       }
     ],
     "workflow": [
       {
         "step": 1,
-        "title": "Planning",
-        "description": "Use Claude Code to break down features into well-structured tasks",
+        "title": "Spec",
+        "description": "Requirements interview and a written spec before any code",
         "icon": "clipboard-list"
       },
       {
         "step": 2,
-        "title": "Implementation",
-        "description": "Leverage Cursor IDE for rapid, context-aware development",
-        "icon": "code"
+        "title": "Tickets",
+        "description": "Spec broken into a dependency graph of small issues",
+        "icon": "file-text"
       },
       {
         "step": 3,
-        "title": "Review",
-        "description": "AI-assisted code review catches issues early",
-        "icon": "search"
+        "title": "Build",
+        "description": "Agents implement tickets in parallel git worktrees",
+        "icon": "code"
       },
       {
         "step": 4,
-        "title": "Documentation",
-        "description": "Auto-generate comprehensive technical docs",
-        "icon": "file-text"
+        "title": "Review",
+        "description": "Review agents plus my own pass, CI on every push",
+        "icon": "search"
       }
     ],
     "results": [
       {
-        "metric": "3x",
-        "label": "Faster Delivery"
+        "metric": "2",
+        "label": "Apps shipped solo"
       },
       {
-        "metric": "80%",
-        "label": "Less Planning Time"
+        "metric": "1,390+",
+        "label": "Automated tests in HomeStack"
       },
       {
-        "metric": "70%",
-        "label": "Faster Prototyping"
+        "metric": "3",
+        "label": "App languages incl. RTL"
       }
     ]
   },
@@ -332,49 +617,64 @@
     "mobile": [
       "React Native",
       "Expo",
+      "Expo Router",
+      "EAS Build & Update",
       "TypeScript",
-      "Expo Api Routes",
-      "React Native Reanimated",
-      "Expo Updates",
-      "EAS Build",
-      "iOS Development",
-      "Android Development",
-      "Mobile UX Design"
+      "Reanimated",
+      "NativeWind",
+      "FlashList",
+      "RevenueCat",
+      "Push notifications",
+      "Universal links",
+      "RTL & localization"
+    ],
+    "ai": [
+      "Claude Code",
+      "Custom skills & subagents",
+      "MCP servers",
+      "Anthropic SDK",
+      "OpenAI API",
+      "Vercel AI SDK",
+      "Structured output (zod)",
+      "Cursor"
     ],
     "fullStack": [
-      "React",
+      "React 19",
       "Next.js",
       "TypeScript",
-      "Node.js",
-      "REST APIs",
-      "Supabase",
       "Tailwind CSS",
-      "Framer Motion",
-      "State Management (Zustand, Redux)",
-      "React Query"
+      "TanStack Query",
+      "shadcn/ui",
+      "PWA & offline",
+      "Framer Motion"
     ],
     "backend": [
       "Node.js",
+      "Hono",
       "Express",
       "PostgreSQL",
-      "Mysql",
+      "Drizzle ORM",
+      "Supabase",
+      "MySQL",
       "MongoDB",
-      "AWS (S3, Lambda, EC2)"
+      "Cloudflare R2",
+      "AWS"
     ],
     "tools": [
-      "Git",
       "GitHub Actions",
-      "Jenkins",
       "Jest",
-      "React Testing Library",
-      "ESLint",
+      "Vitest",
+      "Playwright",
       "Sentry",
+      "PostHog",
       "Mixpanel",
+      "Vercel",
+      "Railway",
       "Figma"
     ]
   },
   "meta": {
-    "lastUpdated": "2026-01-14",
-    "version": "1.0.0"
+    "lastUpdated": "2026-11-12",
+    "version": "2.0.0"
   }
 }

@@ -25,13 +25,16 @@ import {
   GraduationCap,
   TrendingUp,
   Star,
-  Download,
-  Users,
   RefreshCw,
   Bell,
   Layout,
   ExternalLink,
   Zap,
+  Calculator,
+  Swords,
+  Trophy,
+  Sparkles,
+  Languages,
 } from "lucide-react";
 import {
   Card,
@@ -43,7 +46,7 @@ import {
 import { Button } from "@/components/ui/button";
 import AppStoreBadge from "@/components/features/AppStoreBadge";
 import FeatureShowcase from "@/components/features/FeatureShowcase";
-import DeviceMockup from "@/components/features/DeviceMockup";
+import Image from "next/image";
 import resumeData from "@/data/resume.json";
 import type { IndieProject } from "@/types/resume";
 
@@ -58,6 +61,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   bell: Bell,
   layout: Layout,
   zap: Zap,
+  calculator: Calculator,
+  swords: Swords,
+  trophy: Trophy,
+  sparkles: Sparkles,
+  languages: Languages,
 };
 
 // Feature Card Component (for projects without images)
@@ -116,36 +124,78 @@ function FeatureList({ features }: { features: IndieProject["features"] }) {
   );
 }
 
-// Metric Display Component
-function MetricDisplay({
-  icon: Icon,
-  label,
-  value,
-  index,
+// App Store style info ribbon: small caps label, big value, sub label
+function InfoRibbon({
+  items,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-  value: string;
-  index: number;
+  items: { label: string; value: string; sub?: string; stars?: boolean }[];
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="flex items-center gap-3 rounded-lg bg-card/30 p-4 backdrop-blur-sm">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-        <Icon className="h-5 w-5" />
-      </div>
-      <div>
-        <div className="text-2xl font-bold text-foreground">{value}</div>
-        <div className="text-sm text-muted-foreground">{label}</div>
-      </div>
-    </motion.div>
+    <dl className="scrollbar-hide flex divide-x divide-border/60 overflow-x-auto border-y border-border/60 py-4">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className="flex min-w-[112px] flex-1 flex-col items-center gap-1 px-4 text-center">
+          <dt className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+            {item.label}
+          </dt>
+          <dd className="text-xl font-semibold tracking-tight text-foreground">
+            {item.value}
+          </dd>
+          <dd className="flex items-center gap-0.5 text-xs text-muted-foreground">
+            {item.stars
+              ? Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-3 w-3 fill-current"
+                    aria-hidden="true"
+                  />
+                ))
+              : item.sub}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+// Horizontally scrolling store screenshots with snap, like an App Store listing
+function ScreenshotGallery({
+  shots,
+  appName,
+}: {
+  shots: NonNullable<IndieProject["screenshots"]>;
+  appName: string;
+}) {
+  return (
+    <div className="relative -mx-4 md:-mx-6">
+      <ul
+        className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 pt-2 md:gap-5 md:px-6"
+        aria-label={`${appName} store screenshots`}>
+        {shots.map((shot, index) => (
+          <motion.li
+            key={shot.src}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: index * 0.07 }}
+            className="w-[62vw] max-w-[230px] shrink-0 snap-center lg:w-auto lg:max-w-none lg:flex-1 lg:shrink">
+            <div className="relative aspect-[828/1792] overflow-hidden rounded-[1.5rem] border border-border/60 bg-black shadow-xl shadow-black/30 transition-transform duration-300 hover:-translate-y-1.5">
+              <Image
+                src={shot.src}
+                alt={`${appName} – ${shot.title}`}
+                fill
+                sizes="230px"
+                className="object-cover"
+              />
+            </div>
+            <p className="mt-3 text-center text-sm font-medium text-foreground">
+              {shot.title}
+            </p>
+          </motion.li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -235,11 +285,12 @@ export default function IndieProjectsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-12 text-center">
-          <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Indie Projects
+          <h2 className="mb-4 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+            Shipped Products
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            From concept to production - building and shipping apps end-to-end
+            Designed, built and shipped end to end — from first commit to the
+            App Store and Google Play
           </p>
         </motion.div>
 
@@ -250,13 +301,13 @@ export default function IndieProjectsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-12 flex justify-center">
-            <div className="inline-flex gap-2 rounded-xl border border-border/50 bg-card/30 p-1.5 backdrop-blur-sm">
+            <div className="scrollbar-hide inline-flex max-w-full gap-2 overflow-x-auto rounded-xl border border-border/50 bg-card/30 p-1.5 backdrop-blur-sm">
               {projects.map((project, index) => (
                 <button
                   key={project.name}
                   onClick={() => handleProjectSelect(index)}
                   className={`
-                    relative rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-300
+                    relative shrink-0 whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-300
                     ${
                       selectedIndex === index
                         ? "bg-primary/10 text-primary"
@@ -278,87 +329,89 @@ export default function IndieProjectsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}>
-            {/* Main Content: Two-column layout for mobile apps, centered for web */}
-            <div
-              className={`grid gap-12 ${
-                isMobileProject(selectedProject)
-                  ? "lg:grid-cols-2 lg:gap-16"
-                  : ""
-              }`}>
-              {/* Left Column: Device Mockup (only for mobile apps) */}
-              {isMobileProject(selectedProject) && (
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="flex items-center justify-center">
-                  <DeviceMockup
-                    platform="ios"
-                    screenshot="/images/poker-ai/hero-screenshot.webp"
-                  />
-                </motion.div>
-              )}
+            {isMobileProject(selectedProject) ? (
+              <div className="mx-auto max-w-5xl">
+                {/* Store header: icon, name, badges */}
+                <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
+                  {selectedProject.icon && (
+                    <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-[22%] border border-border/60 shadow-xl shadow-primary/20 sm:h-32 sm:w-32">
+                      <Image
+                        src={selectedProject.icon}
+                        alt={`${selectedProject.name} app icon`}
+                        fill
+                        sizes="128px"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                      {selectedProject.name}
+                    </h3>
+                    <p className="mt-1 text-lg text-muted-foreground">
+                      {selectedProject.tagline}
+                    </p>
+                    <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+                      {selectedProject.links.appStore && (
+                        <AppStoreBadge
+                          platform="ios"
+                          url={selectedProject.links.appStore}
+                        />
+                      )}
+                      {selectedProject.links.playStore && (
+                        <AppStoreBadge
+                          platform="android"
+                          url={selectedProject.links.playStore}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-              {/* Right Column (or centered for web): Project Details */}
-              <div
-                className={`flex flex-col justify-center space-y-8 ${
-                  !isMobileProject(selectedProject)
-                    ? "mx-auto max-w-2xl text-center"
-                    : ""
-                }`}>
-                {/* Project Title & Tagline */}
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    x: isMobileProject(selectedProject) ? 50 : 0,
-                  }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}>
-                  {/* Platform Badge for Web projects */}
-                  {!isMobileProject(selectedProject) && (
+                {selectedProject.store && (
+                  <div className="mt-8">
+                    <InfoRibbon items={selectedProject.store} />
+                  </div>
+                )}
+
+                {selectedProject.screenshots && (
+                  <div className="mt-10">
+                    <ScreenshotGallery
+                      shots={selectedProject.screenshots}
+                      appName={selectedProject.name}
+                    />
+                  </div>
+                )}
+
+                <p className="mx-auto mt-10 max-w-3xl text-center text-lg leading-relaxed text-muted-foreground">
+                  {selectedProject.description}
+                </p>
+
+                <div className="mt-12">
+                  <FeatureList features={selectedProject.features} />
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="mx-auto flex max-w-2xl flex-col justify-center space-y-8 text-center">
+                  <div>
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                       <Layout className="h-4 w-4" />
                       Progressive Web App
                     </div>
-                  )}
-                  <h3 className="mb-2 text-3xl font-bold text-foreground md:text-4xl">
-                    {selectedProject.name}
-                  </h3>
-                  <p className="mb-4 text-xl text-primary">
-                    {selectedProject.tagline}
-                  </p>
-                  <p className="text-lg leading-relaxed text-muted-foreground">
-                    {selectedProject.description}
-                  </p>
-                </motion.div>
+                    <h3 className="mb-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                      {selectedProject.name}
+                    </h3>
+                    <p className="mb-4 text-xl text-primary">
+                      {selectedProject.tagline}
+                    </p>
+                    <p className="text-lg leading-relaxed text-muted-foreground">
+                      {selectedProject.description}
+                    </p>
+                  </div>
 
-                {/* App Store Badges OR Website Link */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className={`flex flex-wrap gap-4 ${
-                    !isMobileProject(selectedProject) ? "justify-center" : ""
-                  }`}>
-                  {/* Mobile app badges */}
-                  {selectedProject.links.appStore && (
-                    <AppStoreBadge
-                      platform="ios"
-                      url={selectedProject.links.appStore}
-                      className="w-40"
-                    />
-                  )}
-                  {selectedProject.links.playStore && (
-                    <AppStoreBadge
-                      platform="android"
-                      url={selectedProject.links.playStore}
-                      className="w-40"
-                    />
-                  )}
-
-                  {/* Web project link */}
-                  {!isMobileProject(selectedProject) &&
-                    selectedProject.links.website && (
+                  {selectedProject.links.website && (
+                    <div className="flex justify-center">
                       <Button asChild variant="default" size="lg">
                         <a
                           href={selectedProject.links.website}
@@ -369,77 +422,29 @@ export default function IndieProjectsSection() {
                           Visit Website
                         </a>
                       </Button>
-                    )}
-                </motion.div>
+                    </div>
+                  )}
 
-                {/* Metrics */}
-                {selectedProject.metrics && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className={`grid gap-4 ${
-                      isMobileProject(selectedProject)
-                        ? "grid-cols-3"
-                        : "grid-cols-2 max-w-md mx-auto"
-                    }`}>
-                    {/* Mobile app metrics */}
-                    {selectedProject.metrics.downloads && (
-                      <MetricDisplay
-                        icon={Download}
-                        label="Downloads"
-                        value={selectedProject.metrics.downloads}
-                        index={0}
-                      />
-                    )}
-                    {selectedProject.metrics.rating && (
-                      <MetricDisplay
-                        icon={Star}
-                        label="Rating"
-                        value={selectedProject.metrics.rating.toString()}
-                        index={1}
-                      />
-                    )}
-                    {selectedProject.metrics.users && (
-                      <MetricDisplay
-                        icon={Users}
-                        label="Active Users"
-                        value={selectedProject.metrics.users}
-                        index={2}
-                      />
-                    )}
-                    {/* Web project metrics */}
-                    {selectedProject.metrics.impact && (
-                      <MetricDisplay
-                        icon={Zap}
-                        label="Impact"
-                        value={selectedProject.metrics.impact}
-                        index={0}
-                      />
-                    )}
-                  </motion.div>
-                )}
-              </div>
-            </div>
+                  {selectedProject.metrics?.impact && (
+                    <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-sm font-medium text-foreground">
+                      <Zap className="h-4 w-4 text-primary" />
+                      {selectedProject.metrics.impact}
+                    </div>
+                  )}
+                </div>
 
-            {/* Feature Showcase - Use gallery for images, list for no images */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-20">
-              <h4 className="mb-8 text-center text-2xl font-bold text-foreground">
-                Key Features
-              </h4>
-              {hasFeatureImages(selectedProject) ? (
-                <FeatureShowcase
-                  features={selectedProject.features}
-                  isWebProject={!isMobileProject(selectedProject)}
-                />
-              ) : (
-                <FeatureList features={selectedProject.features} />
-              )}
-            </motion.div>
+                <div className="mt-16">
+                  {hasFeatureImages(selectedProject) ? (
+                    <FeatureShowcase
+                      features={selectedProject.features}
+                      isWebProject
+                    />
+                  ) : (
+                    <FeatureList features={selectedProject.features} />
+                  )}
+                </div>
+              </>
+            )}
 
             {/* Tech Stack */}
             <motion.div

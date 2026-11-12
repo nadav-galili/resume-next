@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nadav Galili - Full-Stack & Mobile Developer",
-  description: "Full-stack developer with 5 years of experience building production applications. Shipped Poker AI to iOS and Android app stores.",
+  title: "Nadav Galili — React Native & Full-Stack Developer",
+  description: "React Native / Expo and full-stack developer with 6+ years in production. Shipped Poker AI: HomeStack and Mibo to the App Store.",
   keywords: [
     "React Native",
     "Expo",
@@ -37,15 +37,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nadav Galili" }],
   openGraph: {
-    title: "Nadav Galili - Full-Stack & Mobile Developer",
-    description: "Full-stack developer with 5 years of experience building production applications. Shipped Poker AI to iOS and Android app stores.",
+    title: "Nadav Galili — React Native & Full-Stack Developer",
+    description: "React Native / Expo and full-stack developer with 6+ years in production. Shipped Poker AI: HomeStack and Mibo to the App Store.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nadav Galili - Full-Stack & Mobile Developer",
-    description: "Full-stack developer with 5 years of experience building production applications.",
+    title: "Nadav Galili — React Native & Full-Stack Developer",
+    description: "React Native / Expo and full-stack developer with 6+ years in production.",
   },
 };
 
