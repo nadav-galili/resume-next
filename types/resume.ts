@@ -11,6 +11,8 @@ export interface PersonalInfo {
   email: string
   phone?: string
   location: string
+  /** Short stat strip shown under the hero copy */
+  highlights?: Array<{ value: string; label: string }>
   links: {
     linkedin: string
     github: string
@@ -89,7 +91,12 @@ export interface IndieProject {
   buildNotes: BuildNotes
   links: ProjectLinks
   metrics?: ProjectMetrics
-  screenshots?: string[]
+  /** App icon (mobile projects) */
+  icon?: string
+  /** Store screenshots, in listing order */
+  screenshots?: Array<{ src: string; title: string }>
+  /** App Store style info ribbon */
+  store?: Array<{ label: string; value: string; sub?: string; stars?: boolean }>
   featured?: boolean
 }
 
@@ -129,6 +136,7 @@ export interface Skills {
   fullStack: string[]
   backend: string[]
   tools: string[]
+  ai?: string[]
   categories?: {
     name: string
     items: string[]

@@ -1,31 +1,10 @@
 # Poker AI Screenshots
 
-All Poker AI app screenshots for the resume web app.
+Store screenshots for Poker AI: HomeStack, taken from the App Store listing (v1.7.3, September 2026).
 
-## Current Files
+- `icon.webp` - app icon (512x512)
+- `01-league-home.webp` … `05-league-stats.webp` - listing screenshots in store order (828x1792)
+- `00-splash.webp` - splash poster (not used on the site yet)
 
-- `hero-screenshot.webp` - Main app screenshot for 3D device mockup (used in IndieProjectsSection)
-- `feature-1.webp` - Feature showcase screenshot #1
-- `feature-2.webp` - Feature showcase screenshot #2
-- `feature-3.webp` - Feature showcase screenshot #3
-- `feature-4.webp` - Feature showcase screenshot #4
-
-## Component Usage
-
-### IndieProjectsSection.tsx
-- Uses `hero-screenshot.webp` in the 3D device mockup
-- Path: `/images/poker-ai/hero-screenshot.webp`
-
-### Future Usage
-- Feature screenshots can be used in:
-  - BuildNotesSection (code walkthrough backgrounds)
-  - Feature cards (hover previews)
-  - Image galleries or carousels
-
-## Image Guidelines
-
-- **Format**: WebP (optimized for web performance)
-- **Optimization**: All images are pre-optimized
-- **Responsive**: Images should work well on mobile and desktop
-- **Max dimensions**: 1920x1080 for hero images, smaller for features
-- **Device mockups**: Consider showing app in device frames for professional look
+Paths are referenced from `data/resume.json` (`indieProjects[].icon` and `indieProjects[].screenshots`).
+The hero fan uses the first three screenshots of the featured project.
